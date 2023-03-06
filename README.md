@@ -13,4 +13,4 @@ Rodrigo Dubeux - rdmo@cesar.school<br/>
 Victor Hora - vht@cesar.school
 
 ## Licença
-Este projeto está licenciado sob a licença MIT.
+Este projeto está licenciado sob a licença MIT - consulte o arquivo LICENSE.md para obter detalhes.
