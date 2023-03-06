@@ -11,3 +11,6 @@ João Henrique - jhml@cesar.school<br/>
 Pedro Leite - phmal@cesar.school<br/> 
 Rodrigo Dubeux - rdmo@cesar.school<br/>
 Victor Hora - vht@cesar.school
+
+## Licença
+Este projeto está licenciado sob a licença MIT.
