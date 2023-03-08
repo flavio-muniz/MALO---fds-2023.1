@@ -32,6 +32,9 @@ Trata-se de um software de gerenciamento de bares e restaurantes baseado em pyth
 O objetivo deste projeto é fornecer uma solução abrangente e eficiente para gerenciamento de restaurantes. Com um conjunto completo de recursos para gestão de pedidos, controle de estoque, acompanhamento de desempenho e análise de dados, o programa oferece uma solução acessível e confiável para a administração de estabelecimentos gastronômicos. Este programa é ideal para proprietários de restaurantes, gerentes e equipe de atendimento ao cliente, melhorando a eficiência operacional e proporcionando uma experiência de jantar aprimorada para os clientes.
 
 ## Equipe
+<div style="text-align:center">
+  <img src="MALO---fds-2023.1\Fotos\João.jpg" width="200" height="200" class="img-circle">
+</div>
 Diego Arruda - dca2@cesar.school<br/> 
 Flávio Romero - frssm@cesar.school<br/> 
 João Henrique - jhml@cesar.school<br/> 
