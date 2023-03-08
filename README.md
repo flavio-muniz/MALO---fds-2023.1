@@ -33,7 +33,7 @@ O objetivo deste projeto é fornecer uma solução abrangente e eficiente para g
 
 ## Equipe
 <div style="text-align:center">
-  <img src="MALO---fds-2023.1\Fotos\João.jpg" width="200" height="200" class="img-circle">
+  <img src="Fotos\João.jpg" width="200" height="200" class="img-circle">
 </div>
 Diego Arruda - dca2@cesar.school<br/> 
 Flávio Romero - frssm@cesar.school<br/> 
