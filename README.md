@@ -40,5 +40,5 @@ Rodrigo Dubeux - rdmo@cesar.school<br/>
 Victor Hora - vht@cesar.school
 
 ## Licença
-Este projeto está licenciado sob a licença MIT.
+Este projeto está licenciado sob a licença [MIT](https://github.com/flavio-muniz/MALO---fds-2023.1/blob/main/LICENSE).
 
