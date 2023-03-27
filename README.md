@@ -28,15 +28,15 @@ Trata-se de um software de gerenciamento de bares e restaurantes baseado em pyth
 
 ## Protótipo navegável
 
-##### Ponto de vista do garçom:
+Ponto de vista do garçom:
 
 <a href="https://www.figma.com/proto/lL2jRtZKjspHUBX0nN0q6R/MALO?node-id=34-866&scaling=min-zoom&page-id=27%3A349&starting-point-node-id=34%3A866"><img src="https://logospng.org/download/figma/figma-1024.png" alt="Figma" style="width:60px;height:60px;"></a>
 
-##### Ponto de vista do gerente:
+Ponto de vista do gerente:
 
 <a href="https://www.figma.com/proto/lL2jRtZKjspHUBX0nN0q6R/MALO?node-id=27-684&scaling=min-zoom&page-id=27%3A349&starting-point-node-id=27%3A684"><img src="https://logospng.org/download/figma/figma-1024.png" alt="Figma" style="width:60px;height:60px;"></a>
 
-##### Protótipo em vídeo:
+Protótipo em vídeo:
 
 <a href="https://www.youtube.com/watch?v=7pyBFYLmz1s"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
           
