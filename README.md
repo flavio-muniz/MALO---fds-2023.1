@@ -38,7 +38,7 @@ Ponto de vista do gerente:
 
 ##Protótipo em vídeo:
 
-<a href="https://www.youtube.com/watch?v=7pyBFYLmz1s"><img src="https://www.freepnglogos.com/uploads/youtube-logo-hd-8.png" alt="Youtube" style="width:120px;height:120px;"></a>
+<a href="https://www.youtube.com/watch?v=7pyBFYLmz1s"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:120px;height:120px;"></a>
           
 ## Missão
 O objetivo deste projeto é fornecer uma solução abrangente e eficiente para gerenciamento de restaurantes. Com um conjunto completo de recursos para gestão de pedidos, controle de estoque, acompanhamento de desempenho e análise de dados, o programa oferece uma solução acessível e confiável para a administração de estabelecimentos gastronômicos. Este programa é ideal para proprietários de restaurantes, gerentes e equipe de atendimento ao cliente, melhorando a eficiência operacional e proporcionando uma experiência de jantar aprimorada para os clientes.
