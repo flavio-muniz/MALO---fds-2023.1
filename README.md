@@ -35,6 +35,10 @@ Ponto de vista do garçom:
 Ponto de vista do gerente:
 
 <a href="https://www.figma.com/proto/lL2jRtZKjspHUBX0nN0q6R/MALO?node-id=27-684&scaling=min-zoom&page-id=27%3A349&starting-point-node-id=27%3A684"><img src="https://logospng.org/download/figma/figma-1024.png" alt="Figma" style="width:60px;height:60px;"></a>
+
+## Protótipo em vídeo
+
+<a href="https://www.youtube.com/watch?v=7pyBFYLmz1s"><img src="https://www.freepnglogos.com/uploads/youtube-logo-hd-8.png" alt="Youtube" style="width:60px;height:60px;"></a>
           
 ## Missão
 O objetivo deste projeto é fornecer uma solução abrangente e eficiente para gerenciamento de restaurantes. Com um conjunto completo de recursos para gestão de pedidos, controle de estoque, acompanhamento de desempenho e análise de dados, o programa oferece uma solução acessível e confiável para a administração de estabelecimentos gastronômicos. Este programa é ideal para proprietários de restaurantes, gerentes e equipe de atendimento ao cliente, melhorando a eficiência operacional e proporcionando uma experiência de jantar aprimorada para os clientes.
