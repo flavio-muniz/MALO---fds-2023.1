@@ -29,9 +29,11 @@ Trata-se de um software de gerenciamento de bares e restaurantes baseado em pyth
 ## Protótipo navegável
 
 Ponto de vista do garçom
+
 <a href="https://www.figma.com/proto/lL2jRtZKjspHUBX0nN0q6R/MALO?node-id=34-866&scaling=min-zoom&page-id=27%3A349&starting-point-node-id=34%3A866"><img src="https://logospng.org/download/figma/figma-1024.png" alt="Figma" style="width:60px;height:60px;"></a>
 
 Ponto de vista do gerente
+
 <a href="https://www.figma.com/proto/lL2jRtZKjspHUBX0nN0q6R/MALO?node-id=27-684&scaling=min-zoom&page-id=27%3A349&starting-point-node-id=27%3A684"><img src="https://logospng.org/download/figma/figma-1024.png" alt="Figma" style="width:60px;height:60px;"></a>
           
 ## Missão
