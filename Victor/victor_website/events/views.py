@@ -20,7 +20,7 @@ def home(request,year=datetime.now().year, month=datetime.now().strftime('%M')):
 
     #pegando o tempo atual
     time= now.strftime('%I:%M:%S %p')
-    return render(request, 'home.html',{
+    return render(request, 'events/home.html',{
         "first_name" : name,
         "year" : year,
         "month" : month,
