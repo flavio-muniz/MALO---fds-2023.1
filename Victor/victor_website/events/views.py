@@ -4,7 +4,7 @@ from calendar import HTMLCalendar
 from datetime import datetime
 
 # Create your views here.
-def home(request,year=datetime.now().year, month=datetime.now().strftime('%M')):
+def home(request,year=datetime.now().year, month=datetime.now().strftime('%B')):
     name = "Victor"
     month = month.capitalize() #convertendo para minúsculo
     #convertendo mes de string para int
