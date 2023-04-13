@@ -5,6 +5,7 @@ from calendar import HTMLCalendar
 from datetime import datetime,date
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from .models import Ingredient
 
 # Create your views here.
 
@@ -20,7 +21,6 @@ def login_user(request):
         # Return an 'invalid login' error message.Ironicamente messages.sucess
             messages.success(request,("There Was An Error Loggin In, Try Again..."))
             return redirect('calendario')
-    
     else:
         return render(request, 'login.html',{})
 
@@ -43,4 +43,10 @@ def calendario(request, year=None, month=None):
         "current_year": current_year,
         "time": time,
         "day": day,
+    })
+
+def All_ingredient(request):
+    ingredient_list = Ingredient.objects.all()
+    return render(request,'listadeingredientes.html',{
+        'ingredient_list':ingredient_list,
     })

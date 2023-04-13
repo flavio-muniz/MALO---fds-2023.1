@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+
+        <h1>Lista de Ingredientes</h1>
+
+        {% for ingredient in ingredient_list %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ ingredient }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Data de Validade: {{ ingredient.exp_date }}</li>
+              <li class="list-group-item">Quantidade: {{ ingredient.quantity }} {{ ingredient.measure_unit }}</li>
+              <li class="list-group-item">Preço: R$ {{ ingredient.price }} </li>
+              <li class="list-group-item">Obs: {{ ingredient.obs }}</li>
+            </ul>
+          </div>
+        {% endfor %}
+
+    </center>
+{% endblock %}

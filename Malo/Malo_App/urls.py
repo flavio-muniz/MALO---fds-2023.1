@@ -12,4 +12,5 @@ urlpatterns = [
     path('<int:year>/<str:month>/', views.calendario, name="calendario"),
     path('home/', views.calendario, name="calendario"),
     path('login/', views.login_user, name="login"),
+    path('ingredientes/', views.All_ingredient,name="ingredient_list"),
 ]

@@ -11,8 +11,8 @@ class Ingredient(models.Model):
     '''quantidade que consta no estoque do ingrediente'''
     measure_unit = models.CharField('Unidade de medida',max_length=10) 
     '''unidade de medida utilzada ex.: kg, gramas, etc'''
-    price = models.FloatField('Preço de compra')
-    '''preco de compra do ingrediente (unitariamente)'''
+    price = models.FloatField('Preço de compra(total)')
+    '''preco de compra do ingrediente (total)'''
     obs = models.TextField('Observação', blank=True)
     '''ex.: marca parmalate, deixar na geladeira, etc'''
 
