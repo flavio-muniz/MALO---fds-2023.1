@@ -1,6 +1,14 @@
 from django.db import models
+from django.core.validators import MinValueValidator
 
 # Create your models here.
+class Cardapio(models.Model):
+    name = models.CharField('Ingrediente', max_length=120)
+    price = models.FloatField('Preço de venda')
+    def __str__(self):
+        return self.name
+
+
 
 class Ingredient(models.Model):
     name = models.CharField('Ingrediente', max_length=120) 
@@ -18,7 +26,17 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+    
+   
+class Table(models.Model):
+    nome = models.CharField(verbose_name='Mesa', max_length=50)
 
-    
-    
+    @classmethod
+    def adicionar_mesa(cls):
+        mesa = cls.objects.create(nome=f"Mesa {cls.objects.count() + 1}")
+        return mesa
+
+    def __str__(self):
+        return self.nome
+
     

@@ -5,7 +5,8 @@ from calendar import HTMLCalendar
 from datetime import datetime,date
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .models import Ingredient
+from .models import Ingredient,Table
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -23,7 +24,7 @@ def login_user(request):
         else:
         # Return an 'invalid login' error message.Ironicamente messages.sucess
             messages.success(request,("There Was An Error Loggin In, Try Again..."))
-            return redirect('calendario')
+            return redirect('logina')
     else:
         return render(request, 'login.html',{})
 
@@ -53,3 +54,14 @@ def All_ingredient(request):
     return render(request,'listadeingredientes.html',{
         'ingredient_list':ingredient_list,
     })
+
+def adicionar_mesa(request):
+    if request.method == 'POST':
+        mesas = Table.objects.create()
+        return redirect('mesa_list')
+    mesas = Table.objects.all()
+    return render(request, 'adicionarmesas.html', {'mesadd': mesas})
+
+def listar_mesas(request):
+    mesas_list = Table.objects.all()
+    return render(request, 'listademesas.html', {'mesaslist': mesas_list})

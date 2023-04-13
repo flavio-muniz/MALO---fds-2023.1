@@ -10,8 +10,10 @@ urlpatterns = [
     # UUID: universally unique identifier
     # path('', views.home, name="home"),
     path('',views.home, name="home"),
-    path('<int:year>/<str:month>/', views.calendario, name="calendario"),
+    path('<int:year>/<str:month>/', views.calendario, name="calendariodigitado"),
     path('calendar/', views.calendario, name="calendario"),
     path('login/', views.login_user, name="logina"),
     path('ingredientes/', views.All_ingredient,name="ingredient_list"),
+    path('adicionar_mesa/', views.adicionar_mesa, name='adicionar_mesa'),
+     path('mesa/', views.adicionar_mesa, name='mesa_list'),
 ]
