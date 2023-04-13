@@ -1,7 +1,8 @@
 from django.shortcuts import render,redirect
 import calendar
+from django.http import HttpResponse
 from calendar import HTMLCalendar
-from datetime import datetime
+from datetime import datetime,date
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 
@@ -16,35 +17,30 @@ def login_user(request):
             login(request, user)
             return redirect('calendario')
         else:
-        # Return an 'invalid login' error message.
+        # Return an 'invalid login' error message.Ironicamente messages.sucess
             messages.success(request,("There Was An Error Loggin In, Try Again..."))
             return redirect('calendario')
     
     else:
         return render(request, 'events/login.html',{})
 
-def calendario(request,year=datetime.now().year, month=datetime.now().strftime('%B')):
+def calendario(request, year=None, month=None):
     name = "Victor"
-    month = month.capitalize() #convertendo para minúsculo
-    #convertendo mes de string para int
-    month_number = list(calendar.month_name).index(month)
-    month_number = int(month_number)
-
-    #criando calendário
-    cal = HTMLCalendar().formatmonth(year,month_number)
-
-    #pegando o ano atual
     now = datetime.now()
+    year = year or now.year
+    month = month or now.strftime('%B').capitalize()
+    month_number = list(calendar.month_name).index(month)
+    cal = calendar.HTMLCalendar().formatmonth(year, month_number)
     current_year = now.year
-
-    #pegando o tempo atual
-    time= now.strftime('%I:%M:%S %p')
+    time = now.strftime('%I:%M:%S %p')
+    day = date.today().strftime("%d")
     return render(request, 'events/calendario.html',{
-        "first_name" : name,
-        "year" : year,
-        "month" : month,
-        "month_number" : month_number,
+        "first_name": name,
+        "year": year,
+        "month": month,
+        "month_number": month_number,
         "cal": cal,
-        "current_year" : current_year,
-        'time' : time,
+        "current_year": current_year,
+        "time": time,
+        "day": day,
     })

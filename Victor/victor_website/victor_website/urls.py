@@ -22,3 +22,7 @@ urlpatterns = [
     path('login/', include('django.contrib.auth.urls')),
     path('login/', include('events.urls')),
 ]
+
+# configure admin titles
+admin.site.site_header = "Malo Administration Page"
+admin.site.site_title = "Admin Page"
