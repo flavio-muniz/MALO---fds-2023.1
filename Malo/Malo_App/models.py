@@ -1,12 +1,11 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
+
+
 # Create your models here.
-class Cardapio(models.Model):
-    name = models.CharField('Ingrediente', max_length=120)
-    price = models.FloatField('Preço de venda')
-    def __str__(self):
-        return self.name
+
+
 
 class Ingredient(models.Model):
     name = models.CharField('Ingrediente', max_length=120) 
@@ -23,7 +22,20 @@ class Ingredient(models.Model):
     '''ex.: marca parmalate, deixar na geladeira, etc'''
     def __str__(self):
         return self.name
-    
+
+class Dish(models.Model):
+    name = models.CharField('Nome do prato', max_length=120)
+    price = models.FloatField('Preço de venda')
+    description = models.TextField('Descrição')
+    ingredients = models.ManyToManyField(Ingredient)
+    def __str__(self):
+        return self.name
+
+class Category(models.Model):
+    name = models.CharField('Categoria', max_length=120)
+    dishes = models.ManyToManyField(Dish) 
+    def __str__(self):
+        return self.name  
    
 class Table(models.Model):
     nome = models.CharField(verbose_name='Mesa', max_length=50)

@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .forms import IngredientForm
 
 # Create your views here.
 
@@ -55,3 +56,17 @@ def All_ingredient(request):
     return render(request,'listadeingredientes.html',{
         'ingredient_list':ingredient_list,
     })
+
+def Add_ingredient(request):
+    submitted = False
+    if request.method == "POST":
+        form = IngredientForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ("Ingrediente registrado com sucesso!"))
+            return redirect('add_ingredient')
+    else:
+        form = IngredientForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'add_ingredient.html', {'form': form, 'submitted': submitted})

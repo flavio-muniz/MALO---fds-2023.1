@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'baselogin.html' %}
 
 {% block content %}
 
@@ -31,6 +31,9 @@
             <div class="form-group">
               <button type="submit" class="btn btn-primary btn-block btn-xl">Cadastrar</button>
             </div>
+          <div class="form-group">
+            <a href="{% url 'login' %}" class="btn btn-secondary btn-block btn-xl">Já tenho conta</a>
+          </div>
           </form>
         </div>
       </div>
