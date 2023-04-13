@@ -26,6 +26,14 @@ Trata-se de um software de gerenciamento de bares e restaurantes baseado em pyth
 ## Ferramenta de organização de Sprint
 <a href="https://frssm.atlassian.net/jira/software/projects/MF21/boards/1"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" alt="Jira" style="width:60px;height:60px;"></a>
 
+## Diagrama de atividades
+
+Ponto de vista do garçom:
+
+Ponto de vista do gerente:
+
+<a href="https://drive.google.com/file/d/1zL81z_mNLMHhdY--L_jgyQg999LGckA7/view?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Diagrams.net_Logo.svg/2048px-Diagrams.net_Logo.svg.png" alt="Diagrams" style="width:60px;height:60px;"></a>
+
 ## Protótipo navegável
 
 Ponto de vista do garçom:
