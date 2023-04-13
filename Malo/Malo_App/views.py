@@ -28,40 +28,10 @@ def login_user(request):
     else:
         return render(request, 'login.html',{})
 
-def calendario(request, year=None, month=None):
-    name = "Gerente"
-    now = datetime.now()
-    year = year or now.year
-    month = month or now.strftime('%B').capitalize()
-    month_number = list(calendar.month_name).index(month)
-    cal = calendar.HTMLCalendar().formatmonth(year, month_number)
-    current_year = now.year
-    time = now.strftime('%I:%M:%S %p')
-    day = date.today().strftime("%d")
-    return render(request, 'calendario.html',{
-        "first_name": name,
-        "year": year,
-        "month": month,
-        "month_number": month_number,
-        "cal": cal,
-        "current_year": current_year,
-        "time": time,
-        "day": day,
-    })
+
 
 def All_ingredient(request):
     ingredient_list = Ingredient.objects.all()
     return render(request,'listadeingredientes.html',{
         'ingredient_list':ingredient_list,
     })
-
-def adicionar_mesa(request):
-    if request.method == 'POST':
-        mesas = Table.objects.create()
-        return redirect('mesa_list')
-    mesas = Table.objects.all()
-    return render(request, 'adicionarmesas.html', {'mesadd': mesas})
-
-def listar_mesas(request):
-    mesas_list = Table.objects.all()
-    return render(request, 'listademesas.html', {'mesaslist': mesas_list})

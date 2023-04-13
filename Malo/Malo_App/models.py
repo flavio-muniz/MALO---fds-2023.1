@@ -32,11 +32,20 @@ class Table(models.Model):
     nome = models.CharField(verbose_name='Mesa', max_length=50)
 
     @classmethod
-    def adicionar_mesa(cls):
-        mesa = cls.objects.create(nome=f"Mesa {cls.objects.count() + 1}")
+    def adicionar_mesa(cls, quantidade=1):
+        for i in range(quantidade):
+            mesa = cls.objects.create(nome=f"Mesa {cls.objects.count() + 1}")
+        return mesa
+
+    @classmethod
+    def remover_mesa(cls):
+        mesa = cls.objects.last()
+        mesa.delete()
         return mesa
 
     def __str__(self):
         return self.nome
+
+
 
     
