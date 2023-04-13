@@ -8,8 +8,6 @@ class Cardapio(models.Model):
     def __str__(self):
         return self.name
 
-
-
 class Ingredient(models.Model):
     name = models.CharField('Ingrediente', max_length=120) 
     '''nome do ingrediente'''
@@ -23,7 +21,6 @@ class Ingredient(models.Model):
     '''preco de compra do ingrediente (total)'''
     obs = models.TextField('Observação', blank=True)
     '''ex.: marca parmalate, deixar na geladeira, etc'''
-
     def __str__(self):
         return self.name
     
