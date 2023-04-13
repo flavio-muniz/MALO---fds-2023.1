@@ -9,6 +9,9 @@ from .models import Ingredient
 
 # Create your views here.
 
+def home(request):
+    return redirect('logina')
+
 def login_user(request):
     if request.method == "POST":
         username = request.POST["username"]
