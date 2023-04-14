@@ -91,7 +91,14 @@ def Add_dish(request):
     return render(request, 'add_dish.html', {'form': form, 'submitted': submitted})
 
 def Edit_dish(request, dish_id):
-    dish_list = Dish.objects.get(pk = dish_id)
+    dish = Dish.objects.get(pk = dish_id)
+    form = DishForm(request.POST or None, instance=dish)
+    if form.is_valid():
+        form.save()
+        messages.success(request, ("Prato editado com sucesso!"))
+        return redirect('menu')
+
     return render(request,'editdish.html',{
-        'dish_list':dish_list,
+        'dish':dish,
+        'form': form,
     })

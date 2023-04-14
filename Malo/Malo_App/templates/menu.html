@@ -15,12 +15,25 @@
                     <h5 class="card-title">{{ category }}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
-                    {% for dish in category.dishes.all %}
-                        <li class="list-group-item">{{ dish }}</li>
-                    {% endfor %}
+                    <table class="table table-stripped table-hover table-bordered">
+                        {% for dish in category.dishes.all %}
+                        <tr>
+                            <td align="center">
+                                <a href="{% url 'edit_dish' dish.id %}" class="btn btn-secondary btn-block btn-xl">Editar</a>
+                            </td>
+                            <td align="center">
+                                {{ dish }}
+                            </td>
+                            <td align="center">
+                                Excluir
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                     <div class="form-group">
                         <a href="{% url 'add_dish' %}" class="btn btn-secondary btn-block btn-xl">Adicionar novo</a>
-                      </div>
+                    </div>
+                    <br/>
                 </ul>
             </div>
         {% endfor %}
