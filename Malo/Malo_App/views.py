@@ -1,4 +1,3 @@
-from django.forms import forms
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -76,6 +75,12 @@ def Add_ingredient(request):
         if 'submitted' in request.GET:
             submitted = True
     return render(request, 'add_ingredient.html', {'form': form, 'submitted': submitted})
+
+def Delete_ingredient(request, ingredient_id):
+    ingredient = Ingredient.objects.get(pk = ingredient_id)
+    ingredient.delete()
+    return redirect('ingredient_list')
+
 
 def Menu(request):
     categories = Category.objects.all()

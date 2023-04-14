@@ -8,7 +8,21 @@
         {% for ingredient in ingredient_list %}
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">{{ ingredient }}</h5>
+                <table class="table">
+                  <tr>
+                    <td></td>
+                    <td>
+                      <div class="d-grid gap-2 col-6 mx-auto">
+                        <h5>{{ ingredient }}</h5>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'delete_ingredient' ingredient.id %}" class="btn btn-danger btn-block btn-xl">X</a>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
             </div>
             <ul class="list-group list-group-flush">
               <li class="list-group-item">Data de Validade: {{ ingredient.exp_date }}</li>
