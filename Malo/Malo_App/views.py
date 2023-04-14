@@ -1,3 +1,4 @@
+from django.forms import forms
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib import messages
@@ -39,10 +40,16 @@ def SignupPage(request):
             messages.success(request, ("Suas senhas sao divergentes"))
             return redirect('signup') 
         else:
-
-            my_user=User.objects.create_user(uname,email,pass1)
-            my_user.save()
-            return redirect('login') 
+            if User.objects.filter(username=uname).exists():
+                messages.success(request, ('Já existe uma conta com esse nome de usuário. Por favor, escolha outro.'))
+                return redirect('signup')
+            if User.objects.filter(email=email).exists():
+                messages.success(request, ('Já existe uma conta com esse email. Por favor, escolha outro.'))
+                return redirect('signup')   
+            else:
+                my_user=User.objects.create_user(uname,email,pass1)
+                my_user.save()
+                return redirect('login') 
         
     return render (request, 'signup.html')
 
