@@ -10,5 +10,6 @@ urlpatterns = [
     path('listadeingredientes/', views.All_ingredient, name='ingredient_list'),
     path('add-ingredientes/', views.Add_ingredient, name='add_ingredient'),
     path('menu/', views.Menu, name='menu'),
+    path('add-dishes/', views.Add_dish, name='add_dish'),
 ]
 

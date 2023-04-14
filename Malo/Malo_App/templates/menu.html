@@ -5,20 +5,25 @@
 
         <h1>Cardápio</h1>
 
-        {% for category in menu %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">{{ category }}</h5>
-            </div>
-            <ul class="list-group list-group-flush">
-                {% for dish in category.dishes.all %}
-              <li class="list-group-item">{{ dish }}</li>
-                {% endfor %}
-              
-            </ul>
+        <div class="card-group">
+        <!-- Adiciona um elemento div com a classe "card-group" para agrupar os cards -->
 
-          </div>
+        {% for category in menu %}
+            <div class="card" style="width: 18rem; display: inline-block;">
+            <!-- Adiciona a propriedade "display: inline-block" ao estilo do elemento div que envolve o card -->
+                <div class="card-body">
+                    <h5 class="card-title">{{ category }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    {% for dish in category.dishes.all %}
+                        <li class="list-group-item">{{ dish }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         {% endfor %}
+
+        </div>
+        <!-- Fecha o elemento div com a classe "card-group" -->
 
     </center>
 {% endblock %}

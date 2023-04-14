@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient,Dish,Category
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import IngredientForm
+from .forms import IngredientForm,DishForm
 
 # Create your views here.
 
@@ -77,3 +77,16 @@ def Menu(request):
         'menu':categories,
     })
 
+def Add_dish(request):
+    submitted = False
+    if request.method == "POST":
+        form = DishForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ("Prato registrado com sucesso!"))
+            return redirect('add_dish')
+    else:
+        form = DishForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'add_dish.html', {'form': form, 'submitted': submitted})
