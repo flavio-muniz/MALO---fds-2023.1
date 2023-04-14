@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient
+from .models import Ingredient,Dish,Category
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import IngredientForm
@@ -70,3 +70,10 @@ def Add_ingredient(request):
         if 'submitted' in request.GET:
             submitted = True
     return render(request, 'add_ingredient.html', {'form': form, 'submitted': submitted})
+
+def Menu(request):
+    categories = Category.objects.all()
+    return render(request,'menu.html',{
+        'menu':categories,
+    })
+

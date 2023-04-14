@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+
+        <h1>Cardápio</h1>
+
+        {% for category in menu %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">{{ category }}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for dish in category.dishes.all %}
+              <li class="list-group-item">{{ dish }}</li>
+                {% endfor %}
+              
+            </ul>
+
+          </div>
+        {% endfor %}
+
+    </center>
+{% endblock %}
