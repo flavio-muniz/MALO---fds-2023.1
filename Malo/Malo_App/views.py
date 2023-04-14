@@ -1,6 +1,5 @@
 from django.forms import forms
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient,Dish,Category
@@ -91,9 +90,15 @@ def Add_dish(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("Prato registrado com sucesso!"))
-            return redirect('add_dish')
+            return redirect('menu')
     else:
         form = DishForm
         if 'submitted' in request.GET:
             submitted = True
     return render(request, 'add_dish.html', {'form': form, 'submitted': submitted})
+
+def Edit_dish(request, dish_id):
+    dish_list = Dish.objects.get(pk = dish_id)
+    return render(request,'editdish.html',{
+        'dish_list':dish_list,
+    })

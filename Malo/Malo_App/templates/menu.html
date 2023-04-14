@@ -18,6 +18,9 @@
                     {% for dish in category.dishes.all %}
                         <li class="list-group-item">{{ dish }}</li>
                     {% endfor %}
+                    <div class="form-group">
+                        <a href="{% url 'add_dish' %}" class="btn btn-secondary btn-block btn-xl">Adicionar novo</a>
+                      </div>
                 </ul>
             </div>
         {% endfor %}

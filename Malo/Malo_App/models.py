@@ -20,20 +20,29 @@ class Ingredient(models.Model):
     '''preco de compra do ingrediente (total)'''
     obs = models.TextField('Observação', blank=True)
     '''ex.: marca parmalate, deixar na geladeira, etc'''
+
     def __str__(self):
         return self.name
 
 class Dish(models.Model):
     name = models.CharField('Nome do prato', max_length=120)
+    '''Nome do prato'''
     price = models.FloatField('Preço de venda')
+    '''Preço do prato'''
     description = models.TextField('Descrição')
+    '''Descrição do prato'''
     ingredients = models.ManyToManyField(Ingredient)
+    '''Ingredientes utilizados no prato'''
+
     def __str__(self):
         return self.name
 
 class Category(models.Model):
     name = models.CharField('Categoria', max_length=120)
-    dishes = models.ManyToManyField(Dish) 
+    '''Nome da categoria'''
+    dishes = models.ManyToManyField(Dish, blank=True)
+    '''Pratos na categoria'''
+
     def __str__(self):
         return self.name  
    
