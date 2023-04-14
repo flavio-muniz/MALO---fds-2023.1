@@ -2,7 +2,7 @@ from django.forms import forms
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient,Dish,Category
+from .models import Ingredient,Dish,Category, Mesa
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import IngredientForm,DishForm
@@ -102,3 +102,21 @@ def Edit_dish(request, dish_id):
     return render(request,'editdish.html',{
         'dish_list':dish_list,
     })
+
+def all_Mesa(request):
+    mesa_list = Mesa.objects.all()
+    return render(request,'mesa.html',{
+        'mesa_list':mesa_list,
+    })
+
+def add_mesa(request):
+    if request.method == 'POST':
+
+        numero = Mesa.proximo_numero()
+
+        mesa = Mesa(numero=numero)
+        mesa.save()
+
+        return redirect('mesa')
+
+    return render(request, 'mesa.html')
