@@ -56,8 +56,8 @@ class Mesa(models.Model):
         numero = ultima_mesa.numero + 1 if ultima_mesa else 1
         return numero
 
-    def str(self):
-        return str(self.numero)
+    def __str__(self):
+        return f'Mesa {self.numero}'
 
 
 def criar_mesas_iniciais():
