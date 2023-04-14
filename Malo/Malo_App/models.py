@@ -45,25 +45,25 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name  
-   
-class Table(models.Model):
-    nome = models.CharField(verbose_name='Mesa', max_length=50)
+
+class Mesa(models.Model):
+    numero = models.IntegerField(unique=True)
+    descricao = models.CharField(max_length=100, default='Mesa')
 
     @classmethod
-    def adicionar_mesa(cls, quantidade=1):
-        for i in range(quantidade):
-            mesa = cls.objects.create(nome=f"Mesa {cls.objects.count() + 1}")
-        return mesa
-
-    @classmethod
-    def remover_mesa(cls):
-        mesa = cls.objects.last()
-        mesa.delete()
-        return mesa
+    def proximo_numero(cls):
+        ultima_mesa = cls.objects.order_by('-numero').first()
+        numero = ultima_mesa.numero + 1 if ultima_mesa else 1
+        return numero
 
     def __str__(self):
-        return self.nome
+        return f'Mesa {self.numero}'
 
 
+def criar_mesas_iniciais():
+    if not Mesa.objects.exists():
+        for i in range(1, 10):
+            mesa = Mesa(numero=i, descricao=f'Descrição da mesa {i}')
+            mesa.save()
 
     

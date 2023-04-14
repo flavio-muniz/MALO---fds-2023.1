@@ -1,7 +1,8 @@
+from django.forms import forms
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient,Dish,Category
+from .models import Ingredient,Dish,Category, Mesa
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import IngredientForm,DishForm
@@ -38,10 +39,16 @@ def SignupPage(request):
             messages.success(request, ("Suas senhas sao divergentes"))
             return redirect('signup') 
         else:
-
-            my_user=User.objects.create_user(uname,email,pass1)
-            my_user.save()
-            return redirect('login') 
+            if User.objects.filter(username=uname).exists():
+                messages.success(request, ('Já existe uma conta com esse nome de usuário. Por favor, escolha outro.'))
+                return redirect('signup')
+            if User.objects.filter(email=email).exists():
+                messages.success(request, ('Já existe uma conta com esse email. Por favor, escolha outro.'))
+                return redirect('signup')   
+            else:
+                my_user=User.objects.create_user(uname,email,pass1)
+                my_user.save()
+                return redirect('login') 
         
     return render (request, 'signup.html')
 
@@ -102,3 +109,21 @@ def Edit_dish(request, dish_id):
         'dish':dish,
         'form': form,
     })
+
+def all_Mesa(request):
+    mesa_list = Mesa.objects.all()
+    return render(request,'mesa.html',{
+        'mesa_list':mesa_list,
+    })
+
+def add_mesa(request):
+    if request.method == 'POST':
+
+        numero = Mesa.proximo_numero()
+
+        mesa = Mesa(numero=numero)
+        mesa.save()
+
+        return redirect('mesa')
+
+    return render(request, 'mesa.html')
