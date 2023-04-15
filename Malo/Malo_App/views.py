@@ -69,12 +69,25 @@ def Add_ingredient(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("Ingrediente registrado com sucesso!"))
-            return redirect('add_ingredient')
+            return redirect('ingredient_list')
     else:
         form = IngredientForm
         if 'submitted' in request.GET:
             submitted = True
     return render(request, 'add_ingredient.html', {'form': form, 'submitted': submitted})
+
+def Edit_ingredient(request, ingredient_id):
+    ingredient = Ingredient.objects.get(pk = ingredient_id)
+    form = IngredientForm(request.POST or None, instance=ingredient)
+    if form.is_valid():
+        form.save()
+        messages.success(request, ("Ingrediente editado com sucesso!"))
+        return redirect('ingredient_list')
+
+    return render(request,'editingredient.html',{
+        'ingredient': ingredient,
+        'form': form,
+    })
 
 def Delete_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(pk = ingredient_id)
@@ -111,9 +124,14 @@ def Edit_dish(request, dish_id):
         return redirect('menu')
 
     return render(request,'editdish.html',{
-        'dish':dish,
+        'dish': dish,
         'form': form,
     })
+
+def Delete_dish(request, dish_id):
+    dish = Dish.objects.get(pk = dish_id)
+    dish.delete()
+    return redirect('menu')
 
 def all_Mesa(request):
     mesa_list = Mesa.objects.all()
