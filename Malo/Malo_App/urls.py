@@ -14,5 +14,6 @@ urlpatterns = [
     path('edit-dish/<dish_id>', views.Edit_dish, name='edit_dish'),
     path('mesa/', views.all_Mesa, name='mesa'),
     path('add_mesa', views.add_mesa, name='add_mesa'),
+    path('delete_mesa', views.delete_mesa, name='delete_mesa')
 ]
 

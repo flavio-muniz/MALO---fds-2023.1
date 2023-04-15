@@ -132,3 +132,14 @@ def add_mesa(request):
         return redirect('mesa')
 
     return render(request, 'mesa.html')
+
+def delete_mesa(request, id=None):
+    mesa = Mesa.objects.order_by('-numero').first()  # Verifica o primeiro objeto Mesa
+    if mesa is not None:  # Verifica se teve retorno válido
+        mesa = Mesa(pk=mesa.id)
+        mesa.delete()
+        return redirect('mesa')
+    else:
+        messages.success(request, ("Não existem mesas para serem removidas!"))
+        return redirect('mesa')
+
