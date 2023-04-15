@@ -141,15 +141,22 @@ def all_Mesa(request):
 
 def add_mesa(request):
     if request.method == 'POST':
-
         numero = Mesa.proximo_numero()
-
         mesa = Mesa(numero=numero)
         mesa.save()
-
         return redirect('mesa')
-
     return render(request, 'mesa.html')
+
+def add_mult_mesa(request):
+    if request.method == 'POST':
+        qtd_mesas = int(request.POST.get('qtd_mesas', 1))
+        for i in range(qtd_mesas):
+            numero = Mesa.proximo_numero()
+            mesa = Mesa(numero=numero)
+            mesa.save()
+        return redirect('mesa')
+    return render(request, 'mesa.html')
+   
 
 def delete_mesa(request, id=None):
     mesa = Mesa.objects.order_by('-numero').first()  # Verifica o primeiro objeto Mesa
