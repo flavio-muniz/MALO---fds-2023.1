@@ -32,7 +32,7 @@
   <form method="POST" action="{% url 'delete_mult_mesa' %}">
     {% csrf_token %}
     <label for="qtd_mesas">Quantidade de Mesas:</label>
-    <input type="number" id="qtd_mesas" name="qtd_mesas" min="1">
+    <input type="number" id="qtd_mesas" name="qtd_mesas" min="1" required>
     <button type="submit">Remover Mesas</button>
   </form>
 
