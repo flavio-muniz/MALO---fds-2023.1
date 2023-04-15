@@ -9,7 +9,7 @@ class IngredientForm(ModelForm):
 
         labels = {
             'name':'Nome:',
-            'exp_date':'Data de validade(aaaa-mm-dia):',
+            'exp_date':'Data de validade(aaaa-mm-dd):',
             'quantity':'Quantidade',
             'measure_unit':'Unidade de medida( Ex.: kg,gramas,litros,ml,unidades,etc)',
             'price':'Preço de compra:',
