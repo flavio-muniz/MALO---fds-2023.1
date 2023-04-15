@@ -2,42 +2,49 @@
 
 {% block content %}
     <center>
+      <br/>
 
         <h1>Estoque</h1>
+        <br/>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <div class="d-grid gap-2 d-md-flex">
           <a href="{% url 'add_ingredient'%}" class="btn btn-secondary btn-block btn-xl">Adicionar novo</a>
         </div>
+        <br/>
 
-        {% for ingredient in ingredient_list %}
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <table class="table">
-                  <tr>
-                    <td >
-                      <a href="{% url 'edit_ingredient' ingredient.id %}" class="btn btn-secondary btn-block btn-xl">Editar</a>
-                    </td>
-                    <td>
-                      <div class="d-grid gap-2 col-6 mx-auto">
-                        <h5>{{ ingredient }}</h5>
-                      </div>
-                    </td>
-                    <td>
-                      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <a href="{% url 'delete_ingredient' ingredient.id %}" class="btn btn-danger btn-block btn-xl">X</a>
-                      </div>
-                    </td>
-                  </tr>
-                </table>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">Data de Validade: {{ ingredient.exp_date }}</li>
-              <li class="list-group-item">Quantidade: {{ ingredient.quantity }} {{ ingredient.measure_unit }}</li>
-              <li class="list-group-item">Preço: R$ {{ ingredient.price }} </li>
-              <li class="list-group-item">Obs: {{ ingredient.obs }}</li>
-            </ul>
-          </div>
-        {% endfor %}
+        <ul class="list-group list-group-flush">
+          <table class="table table-bordered table-strip">
+            <tr>
+              <td align="center">Ingrediente</td>
+              <td align="center">Data de Validade</td>
+              <td align="center">Quantidade</td>
+              <td align="center">Valor de Compra</td>
+              <td align="center">Observação</td>
+            </tr>
+
+            {% for ingredient in ingredient_list %}
+              <tr>
+                  <td>
+                    <table class="table">
+                      <tr>
+                        <td align="left">
+                          <a href="{% url 'edit_ingredient' ingredient.id %}" class="btn btn-secondary btn-block btn-xl">E</a>
+                        </td>
+                        <td align="center">
+                          {{ ingredient }}
+                        </td>
+                        <td align="right">
+                          <a href="{% url 'delete_ingredient' ingredient.id %}" class="btn btn-danger btn-block btn-xl">X</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td align="center">{{ ingredient.exp_date }}</td>
+                  <td align="center">{{ ingredient.quantity|floatformat:3 }} {{ ingredient.measure_unit }}</td>
+                  <td align="center">R$ {{ ingredient.price|floatformat:2 }}</td>
+                  <td align="center">{{ ingredient.obs }}</td>
+              </tr>
+              {% endfor %}
 
     </center>
 {% endblock %}

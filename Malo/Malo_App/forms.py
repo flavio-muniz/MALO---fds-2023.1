@@ -27,7 +27,6 @@ class IngredientForm(ModelForm):
 
 class DishForm(ModelForm):
     class Meta:
-        model = Category
         model = Dish
         fields = ('name','price','description','ingredients')
 
