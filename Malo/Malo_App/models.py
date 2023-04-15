@@ -59,11 +59,4 @@ class Mesa(models.Model):
     def __str__(self):
         return f'Mesa {self.numero}'
 
-
-def criar_mesas_iniciais():
-    if not Mesa.objects.exists():
-        for i in range(1, 10):
-            mesa = Mesa(numero=i, descricao=f'Descrição da mesa {i}')
-            mesa.save()
-
     
