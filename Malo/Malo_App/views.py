@@ -5,7 +5,7 @@ from .models import Ingredient,Dish,Category, Mesa
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .forms import IngredientForm,DishForm
-
+from django.views.decorators.http import require_POST
 # Create your views here.
 
 
@@ -160,4 +160,17 @@ def delete_mesa(request, id=None):
     else:
         messages.success(request, ("Não existem mesas para serem removidas!"))
         return redirect('mesa')
+    
+def delete_mult_mesa(request):
+    qtd_mesas = int(request.POST.get('qtd_mesas', 0))
+    mesas = Mesa.objects.all()
+    if mesas is not None and len(mesas)>= qtd_mesas:
+        for i in range(qtd_mesas) :
+            mesa = Mesa.objects.order_by('-numero').first()
+            mesa.delete()
+        return redirect('mesa')
+    else:
+        messages.success(request, ("Mesas insuficientes para serem removidas!"))
+        return redirect('mesa')
+
 
