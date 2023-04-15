@@ -59,4 +59,3 @@ class Mesa(models.Model):
     def __str__(self):
         return f'Mesa {self.numero}'
 
-    

@@ -9,7 +9,7 @@ class IngredientForm(ModelForm):
 
         labels = {
             'name':'Nome:',
-            'exp_date':'Data de validade(dd-mm-AAAA):',
+            'exp_date':'Data de validade(aaaa-mm-dd):',
             'quantity':'Quantidade',
             'measure_unit':'Unidade de medida( Ex.: kg,gramas,litros,ml,unidades,etc)',
             'price':'Preço de compra:',
@@ -25,22 +25,31 @@ class IngredientForm(ModelForm):
             'obs': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Observação:'}),
         }
 
-class DishForm(ModelForm):
+class DishForm(forms.ModelForm):
+    category = forms.ModelChoiceField(queryset=Category.objects.all())
+
     class Meta:
         model = Dish
-        fields = ('name','price','description','ingredients')
+        fields = ('category', 'name', 'price', 'description', 'ingredients')
 
         labels = {
+            'category': 'Categoria:',
             'name': 'Nome do prato:',
             'price': 'Preço:',
             'description': 'Descrição no cardápio:',
             'ingredients': 'Ingredientes:',
         }
-
         widgets = {
+            'category': forms.Select(attrs={'class':'form-control'}),
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nome'}),
             'price': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Preço'}),
             'description': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Descrição no cardápio'}),
             'ingredients': forms.SelectMultiple(attrs={'class':'form-control', 'placeholder':'Ingredientes'}),
         }
 
+    def save(self, commit=True):
+        dish = super().save(commit=False)
+        category = self.cleaned_data['category']
+        dish.save()
+        category.dishes.add(dish)
+        return dish
