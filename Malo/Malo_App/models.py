@@ -58,7 +58,7 @@ class Category(models.Model):
     '''Pratos na categoria'''
 
     def __str__(self):
-        return self.name  
+        return self.name 
 
 class Mesa(models.Model):
     numero = models.IntegerField(unique=True)

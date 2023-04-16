@@ -106,15 +106,28 @@ def Add_dish(request):
     submitted = False
     if request.method == "POST":
         form = DishForm(request.POST)
-        if form.is_valid():
-            form.save()
+        DishIngredientFormset = modelformset_factory(DishIngredient, form=DishIngredientForm, extra=0)
+        formset = DishIngredientFormset(request.POST, queryset=DishIngredient.objects.none())
+        if all([form.is_valid(), formset.is_valid()]):
+            parent = form.save(commit=False)
+            parent.save()
+            for form in formset:
+                child = form.save(commit=False)
+                child.dish = parent
+                child.save()
             messages.success(request, ("Prato registrado com sucesso!"))
             return redirect('menu')
     else:
         form = DishForm
+        DishIngredientFormset = modelformset_factory(DishIngredient, form=DishIngredientForm, extra=0)
+        formset = DishIngredientFormset(queryset=DishIngredient.objects.none())
         if 'submitted' in request.GET:
             submitted = True
-    return render(request, 'add_dish.html', {'form': form, 'submitted': submitted})
+    return render(request, 'add_dish.html', {
+        'form': form,
+        'submitted': submitted,
+        'formset': formset,
+        })
 
 def Edit_dish(request, dish_id):
     dish = Dish.objects.get(pk = dish_id)
