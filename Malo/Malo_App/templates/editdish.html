@@ -25,10 +25,15 @@
                                 {% for form in formset %}
                                     <div class="ingredient-form">
                                         {{ form.as_p }}
+                                    <br/><br/>  
                                     </div>
                                 {% endfor %}
                             </div>
-                            <div id="empty-form" class="hidden">{{ formset.empty_form.as_p }}</div>
+                            <div id="empty-form" class="hidden">
+                                {{ formset.empty_form.as_p }}
+                                <!-- <button id="delete-form" type="button" class="btn btn-danger" >X</button> -->
+                                <br/> 
+                            </div>
                             <div class="d-grid gap-2 d-md-block">
                                 <div class="d-flex justify-content-between">
                             <button id="add-more" type="button" class="btn btn-secondary" >Adicionar Ingrediente</button>
@@ -45,6 +50,7 @@
 <script>
     const addMoreBtn = document.getElementById("add-more")
     const totalNewForms = document.getElementById("id_form-TOTAL_FORMS")
+    // const deleteFormBtn = document.getElementById("remove-form")
     
     addMoreBtn.addEventListener("click", add_new_form)
     function add_new_form(event) {
@@ -64,6 +70,24 @@
         formCopyTarget.append(copyEmptyFormEl)
     }
 
+    // document.addEventListener("click", function(event) {
+    //     if (event.target && event.target.id == "delete-form") {
+    //         delete_form(event);
+    //     }
+    // });
+
+    // function delete_form(event) {
+    //     const currentIngredientForms = document.getElementsByClassName(
+    //         "ingredient-form"
+    //     );
+    //     const currentFormCount = currentIngredientForms.length;
+    //     if (currentFormCount >=1) {
+    //         const lastFormEl = currentIngredientForms[currentFormCount - 1];
+    //         lastFormEl.remove();
+    //         totalNewForms.setAttribute("value", currentFormCount - 1);
+    //     }
+    // }
+   
 </script>
 
 {% endblock %}

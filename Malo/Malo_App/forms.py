@@ -43,28 +43,18 @@ class DishIngredientForm(ModelForm):
         }
 
 class DishForm(forms.ModelForm):
-    Categoria = forms.ModelChoiceField(queryset=Category.objects.all())
-
     class Meta:
         model = Dish
-        fields = ('Categoria', 'name', 'price', 'description')
+        fields = ('name', 'price', 'description')
 
         labels = {
-            'Categoria': 'Categoria:',
             'name': 'Nome do prato:',
             'price': 'Preço:',
             'description': 'Descrição no cardápio:',
         }
         widgets = {
-            'ategoria': forms.Select(attrs={'class':'form-control'}),
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nome'}),
             'price': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Preço'}),
             'description': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Descrição no cardápio'}),
         }
 
-    def save(self, commit=True):
-        dish = super().save(commit=False)
-        Categoria = self.cleaned_data['Categoria']
-        dish.save()
-        Categoria.dishes.add(dish)
-        return dish

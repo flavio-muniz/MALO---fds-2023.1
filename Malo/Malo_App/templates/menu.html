@@ -14,15 +14,13 @@
 
         <div class="card-group">
         <!-- Adiciona um elemento div com a classe "card-group" para agrupar os cards -->
-        {% for category in menu %}
+        
             <div class="card" style="width: 18rem; display: inline-block;">
-            <!-- Adiciona a propriedade "display: inline-block" ao estilo do elemento div que envolve o card -->
-                <div class="card-body" align="center">
-                    <h5 class="card-title">{{ category }}</h5>
-                </div>
+
+     
                 <ul class="list-group list-group-flush">
                     <table class="table">
-                        {% for dish in category.dishes.all %}
+                        {% for dish in menu %}
                         <tr>
                             <td align="left">
                                 <a href="{% url 'edit_dish' dish.id %}"  class="btn btn-xl "><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/Media/pencil-square.svg" alt="lapis"></a>
@@ -39,7 +37,7 @@
                     <br/>
                 </ul>
             </div>
-            {% endfor %}
+    
 
         </div>
         <!-- Fecha o elemento div com a classe "card-group" -->

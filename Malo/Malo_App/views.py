@@ -68,7 +68,7 @@ def Add_ingredient(request):
     if request.method == "POST":
         form = IngredientForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
+            form.save()
             messages.success(request, ("Ingrediente registrado com sucesso!"))
             return redirect('ingredient_list')
     else:
@@ -97,9 +97,9 @@ def Delete_ingredient(request, ingredient_id):
 
 
 def Menu(request):
-    categories = Category.objects.all()
+    dishes = Dish.objects.all()
     return render(request,'menu.html',{
-        'menu':categories,
+        'menu':dishes,
     })
 
 def Add_dish(request):
