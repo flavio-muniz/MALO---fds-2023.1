@@ -2,16 +2,19 @@
 
 {% block content %}
     <center>
-
         <h1>Cardápio</h1>
+    </center>
+ 
+        <div class="d-grid gap-2 d-md-block">
+            <a href="{% url 'add_dish' %}" class="btn btn-secondary btn-block btn-xl">Adicionar novo prato</a>
+        </div>
 
         <div class="card-group">
         <!-- Adiciona um elemento div com a classe "card-group" para agrupar os cards -->
-
         {% for category in menu %}
             <div class="card" style="width: 18rem; display: inline-block;">
             <!-- Adiciona a propriedade "display: inline-block" ao estilo do elemento div que envolve o card -->
-                <div class="card-body">
+                <div class="card-body" align="center">
                     <h5 class="card-title">{{ category }}</h5>
                 </div>
                 <ul class="list-group list-group-flush">
@@ -30,16 +33,12 @@
                         </tr>
                         {% endfor %}
                     </table>
-                    <div class="form-group">
-                        <a href="{% url 'add_dish' %}" class="btn btn-secondary btn-block btn-xl">Adicionar novo</a>
-                    </div>
                     <br/>
                 </ul>
             </div>
-        {% endfor %}
+            {% endfor %}
 
         </div>
         <!-- Fecha o elemento div com a classe "card-group" -->
 
-    </center>
 {% endblock %}

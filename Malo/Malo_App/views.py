@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient,Dish,Category, Mesa
+from .models import Ingredient, Dish, Category, Mesa, DishIngredient
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from .forms import IngredientForm,DishForm
+from django.forms.models import modelformset_factory
+from .forms import IngredientForm, DishForm, DishIngredientForm
 from django.views.decorators.http import require_POST
 # Create your views here.
 
@@ -67,7 +68,7 @@ def Add_ingredient(request):
     if request.method == "POST":
         form = IngredientForm(request.POST)
         if form.is_valid():
-            form.save()
+            form.save(commit=False)
             messages.success(request, ("Ingrediente registrado com sucesso!"))
             return redirect('ingredient_list')
     else:
@@ -118,14 +119,23 @@ def Add_dish(request):
 def Edit_dish(request, dish_id):
     dish = Dish.objects.get(pk = dish_id)
     form = DishForm(request.POST or None, instance=dish)
-    if form.is_valid():
-        form.save()
+    DishIngredientFormset = modelformset_factory(DishIngredient, form=DishIngredientForm, extra=0)
+    qs = dish.dishingredient_set.all()
+    formset = DishIngredientFormset(request.POST or None, queryset=qs)
+    if all([form.is_valid(), formset.is_valid()]):
+        parent = form.save(commit=False)
+        parent.save()
+        for form in formset:
+            child = form.save(commit=False)
+            child.dish = parent
+            child.save()
         messages.success(request, ("Prato editado com sucesso!"))
         return redirect('menu')
 
     return render(request,'editdish.html',{
         'dish': dish,
         'form': form,
+        'formset': formset,
     })
 
 def Delete_dish(request, dish_id):
