@@ -1,6 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+  <!-- remoção de mais de uma mesa -->
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <form method="POST" action="{% url 'delete_mult_mesa' %}">
+          {% csrf_token %}
+          <label for="qtd_mesas">Remover mais de uma mesa:</label>
+          <input type="number" id="qtd_mesas" name="qtd_mesas" min="1" required>
+          <button type="submit" class="btn btn-danger btn-block btn-xl" ><img src="/media/trash.svg" alt="Remover mesas">
+        </form>
+      </div>
+      <div class="col-md-6">
+        <form method="POST" action="{% url 'add_mult_mesa' %}">
+          {% csrf_token %}
+          <label for="qtd_mesas">Adicionar mais de uma mesa:</label>
+          <input type="number" id="qtd_mesas" name="qtd_mesas" min="1" required>
+          <button type="submit" class="btn btn-primary btn-block btn-xl" ><img src="/media/plus-square.svg" alt="Adicionar mesas">
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  
+
+
   <center>
     <!-- botao de remover mesas -->
     <br/>
@@ -28,33 +54,7 @@
     </div>
   </center>
 
-  <!-- remoção de mais de uma mesa -->
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-md-12">
-        <form method="POST" action="{% url 'delete_mult_mesa' %}">
-          {% csrf_token %}
-          <label for="qtd_mesas">Remover mais de uma mesa:</label>
-          <input type="number" id="qtd_mesas" name="qtd_mesas" min="1" required>
-          <button type="submit" class="btn btn-danger btn-block btn-xl" >Remover Mesas</button>
-        </form>
-      </div>
-    </div>
-  </div>
-  
-    <!-- adição de mais de uma mesa -->
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-md-12">
-          <form method="POST" action="{% url 'add_mult_mesa' %}">
-            {% csrf_token %}
-            <label for="qtd_mesas">Adicionar mais de uma mesa:</label>
-            <input type="number" id="qtd_mesas" name="qtd_mesas" min="1" required>
-            <button type="submit" class="btn btn-primary btn-block btn-xl" >Adicionar Mesas</button>
-          </form>
-        </div>
-      </div>
-    </div>
+
     
   
 {% endblock %}

@@ -19,5 +19,6 @@ urlpatterns = [
     path('add_mult_mesa/', views.add_mult_mesa, name='add_mult_mesa'),
     path('delete_mesa', views.delete_mesa, name='delete_mesa'),
     path('delete_mult_mesa/', views.delete_mult_mesa, name='delete_mult_mesa')
+   
 ]
 
