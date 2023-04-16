@@ -9,17 +9,21 @@
                     <br/>
                     <h1>Adicionar Ingrediente</h1>
                 </center>
-    
-                    <form class="card-body" action="" method=POST >
-                        {% csrf_token %}
+                    {% if submitted %}
 
-                        {{ form.as_p }}
 
-                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <input type="submit" value="Enviar" class="btn btn-secondary">
-                        </div>
+                    {% else %}
+                        <form class="card-body" action="" method=POST >
+                            {% csrf_token %}
 
-                    </form>
+                            {{ form.as_p }}
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <input type="submit" value="Enviar" class="btn btn-secondary">
+                            </div>
+
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
