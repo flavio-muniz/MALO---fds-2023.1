@@ -1,18 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <center>
-        <h1>Editar Ingrediente</h1>
-        <br/>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-20">
+            <div class="card" style="background-color: #CBCBCB;">
+                <center>
+                    <br/>
+                    <h1>Editar Ingrediente</h1>
+                </center>
 
-        <form action="" method=POST>
-            {% csrf_token %}
-            {{ form.as_p }}
-            <br/>
+                <form class="card-body" action="" method=POST>
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <br/>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <input type="submit" value="Enviar" class="btn btn-secondary">
+                    </div>
 
-            <input type="submit" value="Enviar" class="btn btn-secondary">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
-        </form>
-
-    </center>
 {% endblock %}

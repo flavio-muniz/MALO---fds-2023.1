@@ -6,35 +6,42 @@
         display: none;
     }
 </style>
-
-    <center>
-        <h1>Editar Prato</h1>
-    </center>
-        <br/>
-        
-        <form action="" method=POST>
-            {% csrf_token %}
-            {{ form.as_p }}
-    
-            {% if formset %}
-                <h5>Ingredientes</h5>
-                {{ formset.management_form }}
-                <div id="ingredients">
-                    {% for form in formset %}
-                        <div class="ingredient-form">
-                            {{ form.as_p }}
+<div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-20">
+        <div class="card" style="background-color: #CBCBCB;">
+            <center>
+                <br/>
+                <h1>Editar Prato</h1>
+            </center>
+                    <form class="card-body" action="" method=POST>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                
+                        {% if formset %}
+                            <h5>Ingredientes:</h5>
+                            {{ formset.management_form }}
+                            <div id="ingredients">
+                                {% for form in formset %}
+                                    <div class="ingredient-form">
+                                        {{ form.as_p }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div id="empty-form" class="hidden">{{ formset.empty_form.as_p }}</div>
+                            <div class="d-grid gap-2 d-md-block">
+                                <div class="d-flex justify-content-between">
+                            <button id="add-more" type="button" class="btn btn-secondary" >Adicionar Ingrediente</button>
+                            {% endif %}
+                                <br/>
+                                <input type="submit" value="Enviar" class="btn btn-secondary">
+                            </div>
                         </div>
-                    {% endfor %}
-                </div>
-                <div id="empty-form" class="hidden">{{ formset.empty_form.as_p }}</div>
-                <button id="add-more" type="button" class="btn btn-secondary" >Adicionar Ingrediente</button>
-            {% endif %}
-            <br/>
-    
-    
-            <input type="submit" value="Enviar" class="btn btn-secondary">
-    
-        </form>
+                    </form>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
     const addMoreBtn = document.getElementById("add-more")
     const totalNewForms = document.getElementById("id_form-TOTAL_FORMS")
