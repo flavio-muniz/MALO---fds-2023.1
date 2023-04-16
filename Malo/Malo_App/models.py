@@ -31,8 +31,22 @@ class Dish(models.Model):
     '''Preço do prato'''
     description = models.TextField('Descrição')
     '''Descrição do prato'''
-    ingredients = models.ManyToManyField(Ingredient)
-    '''Ingredientes utilizados no prato'''
+
+    def get_ingredients_children(self):
+        return self.dishingredients_set.all()
+
+    def __str__(self):
+        return self.name
+
+class DishIngredient(models.Model):
+    dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
+    '''Prato que ele participa'''
+    name = models.CharField('Ingrediente', max_length=120) 
+    '''nome do ingrediente'''
+    quantity = models.FloatField('Quantidade')
+    '''quantidade que consta no estoque do ingrediente'''
+    measure_unit = models.CharField('Unidade de medida',max_length=10)
+    '''unidade de medida utilzada ex.: kg, gramas, etc'''
 
     def __str__(self):
         return self.name
