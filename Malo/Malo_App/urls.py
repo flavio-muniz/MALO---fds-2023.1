@@ -16,6 +16,9 @@ urlpatterns = [
     path('delete-dish/<dish_id>', views.Delete_dish, name='delete_dish'),
     path('mesa/', views.all_Mesa, name='mesa'),
     path('add_mesa', views.add_mesa, name='add_mesa'),
-    path('delete_mesa', views.delete_mesa, name='delete_mesa')
+    path('add_mult_mesa/', views.add_mult_mesa, name='add_mult_mesa'),
+    path('delete_mesa', views.delete_mesa, name='delete_mesa'),
+    path('delete_mult_mesa/', views.delete_mult_mesa, name='delete_mult_mesa')
+   
 ]
 

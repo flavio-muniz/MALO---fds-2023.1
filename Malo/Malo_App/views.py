@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms.models import modelformset_factory
 from .forms import IngredientForm, DishForm, DishIngredientForm
-
+from django.views.decorators.http import require_POST
 # Create your views here.
 
 
@@ -151,15 +151,22 @@ def all_Mesa(request):
 
 def add_mesa(request):
     if request.method == 'POST':
-
         numero = Mesa.proximo_numero()
-
         mesa = Mesa(numero=numero)
         mesa.save()
-
         return redirect('mesa')
-
     return render(request, 'mesa.html')
+
+def add_mult_mesa(request):
+    if request.method == 'POST':
+        qtd_mesas = int(request.POST.get('qtd_mesas', 1))
+        for i in range(qtd_mesas):
+            numero = Mesa.proximo_numero()
+            mesa = Mesa(numero=numero)
+            mesa.save()
+        return redirect('mesa')
+    return render(request, 'mesa.html')
+   
 
 def delete_mesa(request, id=None):
     mesa = Mesa.objects.order_by('-numero').first()  # Verifica o primeiro objeto Mesa
@@ -170,4 +177,18 @@ def delete_mesa(request, id=None):
     else:
         messages.success(request, ("Não existem mesas para serem removidas!"))
         return redirect('mesa')
+    
+def delete_mult_mesa(request):
+    qtd_mesas = int(request.POST.get('qtd_mesas', 0))
+    mesas = Mesa.objects.all()
+    if mesas is not None and len(mesas)>= qtd_mesas:
+        for i in range(qtd_mesas) :
+            mesa = Mesa.objects.order_by('-numero').first()
+            mesa.delete()
+        return redirect('mesa')
+    else:
+        messages.success(request, ("Mesas insuficientes para serem removidas!"))
+        return redirect('mesa')
+
+
 

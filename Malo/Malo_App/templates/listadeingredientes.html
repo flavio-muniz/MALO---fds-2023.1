@@ -28,13 +28,13 @@
                     <table class="table">
                       <tr>
                         <td align="left">
-                          <a href="{% url 'edit_ingredient' ingredient.id %}" class="btn btn-secondary btn-block btn-xl">E</a>
+                          <a href="{% url 'edit_ingredient' ingredient.id %}" class="btn btn-xl "><img src="/media/pencil-square.svg" alt="lapis">
                         </td>
                         <td align="center">
                           {{ ingredient }}
                         </td>
                         <td align="right">
-                          <a href="{% url 'delete_ingredient' ingredient.id %}" class="btn btn-danger btn-block btn-xl">X</a>
+                          <a href="{% url 'delete_ingredient' ingredient.id %}" class="btn btn-xl"><img src="/media/trash.svg" alt="excluir">
                         </td>
                       </tr>
                     </table>
