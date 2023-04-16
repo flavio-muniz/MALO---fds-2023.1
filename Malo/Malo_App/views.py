@@ -68,7 +68,7 @@ def Add_ingredient(request):
     if request.method == "POST":
         form = IngredientForm(request.POST)
         if form.is_valid():
-            form.save(commit=False)
+            form.save()
             messages.success(request, ("Ingrediente registrado com sucesso!"))
             return redirect('ingredient_list')
     else:
