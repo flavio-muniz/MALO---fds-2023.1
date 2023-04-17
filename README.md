@@ -75,6 +75,10 @@ Como manipular itens no estoque:
 
 <a href="https://scribehow.com/shared/Como_manipular_itens_no_estoque__bHBtQ4VpR76q36qQviYAjA"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
 
+Como fazer o logout:
+
+<a href="https://scribehow.com/shared/Como_fazer_logout_do_site_Malo__fyL-YjrAR6KJdowO-SDWIA"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
+
 ## Relato sobre o uso de programação em pares
 
 <a href="https://docs.google.com/document/d/1Rqi0MorEtPhKoJW9VL5VPWa65FVbXaZ-W1OhLCvOxoU/edit?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/1481px-Google_Docs_logo_%282014-2020%29.svg.png" alt="Docs" style="width:43px;height:60px;"></a>
