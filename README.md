@@ -56,19 +56,19 @@ Protótipo em vídeo:
 
 ## Roteiro e instruções de acesso
 Como criar conta no Malo
-<a href="https://scribehow.com/shared/Como_criar_conta_no_Malo__f2QfAxePQKOQmMWIR_YyfQ"><img src="https://assets.stickpng.com/images/62f900b8a8320dd346143be3.png" alt="Youtube" style="width:60px;height:60px;"></a>
+<a href="https://scribehow.com/shared/Como_criar_conta_no_Malo__f2QfAxePQKOQmMWIR_YyfQ"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
 
 Como fazer o login
-<a href="https://scribehow.com/shared/Como_fazer_o_login__hXE1cfv6TZq1Qf8zjDqunQ"><img src="https://assets.stickpng.com/images/62f900b8a8320dd346143be3.png" alt="Youtube" style="width:60px;height:60px;"></a>
+<a href="https://scribehow.com/shared/Como_fazer_o_login__hXE1cfv6TZq1Qf8zjDqunQ"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
 
 Como manipular a quantidade de mesas
-<a href="https://scribehow.com/shared/Como_manipular_a_quantidade_de_mesas__1-jJoIGbQCmfct4WXGD45g"><img src="https://assets.stickpng.com/images/62f900b8a8320dd346143be3.png" alt="Youtube" style="width:60px;height:60px;"></a>
+<a href="https://scribehow.com/shared/Como_manipular_a_quantidade_de_mesas__1-jJoIGbQCmfct4WXGD45g"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
 
 Como manipular itens no cardápio
-<a href="https://scribehow.com/shared/Como_manipular_itens_no_cardapio__euxCXYk_TrGCO9jXWee5YA"><img src="https://assets.stickpng.com/images/62f900b8a8320dd346143be3.png" alt="Youtube" style="width:60px;height:60px;"></a>
+<a href="https://scribehow.com/shared/Como_manipular_itens_no_cardapio__euxCXYk_TrGCO9jXWee5YA"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
 
 Como manipular itens no estoque
-<a href="https://scribehow.com/shared/Como_manipular_itens_no_estoque__bHBtQ4VpR76q36qQviYAjA"><img src="https://assets.stickpng.com/images/62f900b8a8320dd346143be3.png" alt="Youtube" style="width:60px;height:60px;"></a>
+<a href="https://scribehow.com/shared/Como_manipular_itens_no_estoque__bHBtQ4VpR76q36qQviYAjA"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
 
 ## Relato sobre o uso de programação em pares
 
