@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-7f^ba^xg$at^*t-zc4+pgjqw1=$c=3t#xs^dtts1r!quf8q4(p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['Malo.eba-qwcspbgk.sa-east-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -56,7 +56,7 @@ ROOT_URLCONF = 'Malo_Project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -122,7 +122,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = 'static'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
