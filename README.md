@@ -50,6 +50,10 @@ Protótipo em vídeo:
 
 <a href="https://www.youtube.com/watch?v=7pyBFYLmz1s"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
+## Site Navegável em vídeo:
+
+<a href="https://www.youtube.com/watch?v=BFxs3OZi9Vg"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
+
 ## Relato sobre o uso de programação em pares
 
 <a href="https://docs.google.com/document/d/1Rqi0MorEtPhKoJW9VL5VPWa65FVbXaZ-W1OhLCvOxoU/edit?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/1481px-Google_Docs_logo_%282014-2020%29.svg.png" alt="Docs" style="width:43px;height:60px;"></a>
