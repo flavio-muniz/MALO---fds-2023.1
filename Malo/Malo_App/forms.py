@@ -60,4 +60,15 @@ class DishForm(forms.ModelForm):
             'description': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Descrição no cardápio'}),
         }
 
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = ('name',)
+        
+        labels = {
+            'name': 'Categoria:',
+        }
+        widgets = {
+            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Categoria'}),
+        }
 

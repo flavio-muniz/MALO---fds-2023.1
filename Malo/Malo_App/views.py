@@ -5,7 +5,7 @@ from .models import Ingredient, Dish, Category, Mesa, DishIngredient
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms.models import modelformset_factory
-from .forms import IngredientForm, DishForm, DishIngredientForm
+from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm
 from django.views.decorators.http import require_POST
 # Create your views here.
 
@@ -104,7 +104,22 @@ def Menu(request):
     return render(request,'menu.html',{
         'menu':dishes,
     })
- 
+
+@login_required(login_url='login')
+def Add_category(request):
+    submitted = False
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ("Categoria registrada com sucesso!"))
+            return redirect('add_category')
+    else:
+        form = CategoryForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'add_category.html', {'form': form, 'submitted': submitted})
+
 
 @login_required(login_url='login')
 def Add_dish(request):

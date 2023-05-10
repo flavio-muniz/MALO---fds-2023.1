@@ -30,7 +30,7 @@ class Category(models.Model):
         return self.name 
 
 class Dish(models.Model):
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, default=Category.objects.order_by('name').first())
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, null=True)
     name = models.CharField('Nome do prato', max_length=120)
     '''Nome do prato'''
     price = models.FloatField('Preço de venda')
