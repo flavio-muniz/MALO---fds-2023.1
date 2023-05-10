@@ -45,16 +45,19 @@ class DishIngredientForm(ModelForm):
 class DishForm(forms.ModelForm):
     class Meta:
         model = Dish
-        fields = ('name', 'price', 'description')
+        fields = ('category','name', 'price', 'description')
 
         labels = {
+            'category': 'Categoria:',
             'name': 'Nome do prato:',
             'price': 'Preço:',
             'description': 'Descrição no cardápio:',
         }
         widgets = {
+            'category': forms.Select(attrs={'class':'form-control', 'placeholder':'Categoria'}),
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nome'}),
             'price': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Preço'}),
             'description': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Descrição no cardápio'}),
         }
+
 
