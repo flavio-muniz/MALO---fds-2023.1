@@ -3,7 +3,7 @@
 {% block content %}
     <center>
         <br/>
-        <h1>Cardápio</h1>
+        <h1>Pratos</h1>
         <br/>
     </center>
  
@@ -20,7 +20,7 @@
      
                 <ul class="list-group list-group-flush">
                     <table class="table">
-                        {% for dish in menu %}
+                        {% for dish in dishes %}
                         <tr>
                             <td align="left">
                                 <a href="{% url 'edit_dish' dish.id %}"  class="btn btn-xl "><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/Media/pencil-square.svg" alt="lapis"></a>

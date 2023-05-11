@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', views.LogoutPage,name='logout'),
     path('ingredient-list/', views.All_ingredient, name='ingredient_list'),
     path('add-ingredientes/', views.Add_ingredient, name='add_ingredient'),
+    path('menu-category/', views.Category_menu, name='menu_category'),
     path('add-category/', views.Add_category, name='add_category'),
     path('delete-ingredient/<ingredient_id>', views.Delete_ingredient, name='delete_ingredient'),
     path('edit-ingredient/<ingredient_id>', views.Edit_ingredient, name='edit_ingredient'),

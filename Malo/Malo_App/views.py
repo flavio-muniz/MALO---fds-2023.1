@@ -102,9 +102,17 @@ def Delete_ingredient(request, ingredient_id):
 def Menu(request):
     dishes = Dish.objects.all()
     return render(request,'menu.html',{
-        'menu':dishes,
+        'dishes':dishes,
     })
 
+@login_required(login_url='login')
+def Category_menu(request):
+    categories = Category.objects.all()
+    dishes = Dish.objects.all()
+    return render(request,'menu_category.html',{
+        'categories':categories,
+        'dishes':dishes,
+    })
 
 @login_required(login_url='login')
 def Add_category(request):
