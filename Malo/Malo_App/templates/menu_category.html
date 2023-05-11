@@ -6,10 +6,20 @@
         <h1>Categorias</h1>
         <br/>
     </center>
- 
-        <div class="d-grid gap-2 d-md-block">
-            <a href="{% url 'add_category' %}" class="btn btn-secondary btn-block btn-xl">Adicionar Categorias</a>
+    <div class="container mt-5">
+        <div class="row">
+          <div class="d-grid gap-2 d-md-block">
+            <div class="d-flex justify-content-between">
+                <div class="col-md-6">
+                    <a href="{% url 'add_category' %}" class="btn btn-secondary btn-block btn-xl">Adicionar Categorias</a>
+                </div>
+                <a href="{% url 'menu' %}" class="btn btn-secondary btn-block btn-xl">Todos os Pratos</a>
+            </div>
         </div>
+    </div>
+            
+ 
+      
         <br/>
 
         <!-- Adiciona um elemento div com a classe "card-group" para agrupar os cards -->
