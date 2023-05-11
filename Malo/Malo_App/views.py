@@ -122,13 +122,32 @@ def Add_category(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("Categoria registrada com sucesso!"))
-            return redirect('menu')
+            return redirect('menu_category')
     else:
         form = CategoryForm
         if 'submitted' in request.GET:
             submitted = True
     return render(request, 'add_category.html', {'form': form, 'submitted': submitted})
 
+@login_required(login_url='login')
+def Edit_category(request, category_id):
+    category = Category.objects.get(pk = category_id)
+    form = CategoryForm(request.POST or None, instance=category)
+    if form.is_valid():
+        form.save()
+        messages.success(request, ("Categoria editada com sucesso!"))
+        return redirect('menu_category')
+
+    return render(request,'edit_category.html',{
+        'category': category,
+        'form': form,
+    })
+
+@login_required(login_url='login')
+def Delete_category(request, category_id):
+    category = Category.objects.get(pk = category_id)
+    category.delete()
+    return redirect('menu_category')
 
 @login_required(login_url='login')
 def Add_dish(request):
