@@ -105,6 +105,7 @@ def Menu(request):
         'menu':dishes,
     })
 
+
 @login_required(login_url='login')
 def Add_category(request):
     submitted = False
@@ -113,7 +114,7 @@ def Add_category(request):
         if form.is_valid():
             form.save()
             messages.success(request, ("Categoria registrada com sucesso!"))
-            return redirect('add_category')
+            return redirect('menu')
     else:
         form = CategoryForm
         if 'submitted' in request.GET:
