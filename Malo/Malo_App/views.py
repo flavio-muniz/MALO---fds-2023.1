@@ -147,6 +147,7 @@ def Edit_category(request, category_id):
 def Delete_category(request, category_id):
     category = Category.objects.get(pk = category_id)
     category.delete()
+    
     return redirect('menu_category')
 
 @login_required(login_url='login')
