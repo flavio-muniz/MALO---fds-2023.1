@@ -7,13 +7,16 @@ from django.contrib.auth.models import User
 from django.forms.models import modelformset_factory
 from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm
 from django.views.decorators.http import require_POST
+from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
 
 
 @login_required(login_url='login')
+@admin_only
 def HomePage(request):
     return render (request, 'home.html')
 
+@unauth_user
 def login_user(request):
     if request.method=='POST':
         username=request.POST.get('username')
@@ -28,6 +31,7 @@ def login_user(request):
 
     return render (request, 'login.html')
 
+@unauth_user
 def SignupPage(request):
     if request.method=='POST':
         uname=request.POST.get('username')
@@ -263,5 +267,11 @@ def delete_mult_mesa(request):
         messages.success(request, ("Mesas insuficientes para serem removidas!"))
         return redirect('mesa')
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'garçom'])
+def Home_garcom(request):
+    mesa_list = Mesa.objects.all()
+    return render (request, 'home_garcom.html',{
+        'mesa_list':mesa_list,
+    })
 
