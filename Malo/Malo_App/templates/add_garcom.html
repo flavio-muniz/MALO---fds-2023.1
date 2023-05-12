@@ -1,0 +1,188 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% comment %} <style>
+    /* Estilos CSS para a tabela */
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 0 auto; /* Centralizar a tabela */
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid black; /* Linha preta entre as linhas */
+        border-right: 1px solid black; /* Linha preta entre as colunas */
+    }
+
+    th {
+        background-color: #f2f2f2;
+        border-top: 1px solid black; /* Linha preta na parte superior */
+        border-left: 1px solid black; /* Linha preta no lado esquerdo */
+    }
+
+    td {
+        border-left: 1px solid black; /* Linha preta no lado esquerdo */
+    }
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .edit-button {
+        color: blue;
+        cursor: pointer;
+    }
+
+    .delete-button {
+        color: red;
+        cursor: pointer;
+    }
+
+    .add-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+</style>
+
+<div style="text-align: center; margin-top: 20px; margin-bottom: 20px">
+    <h1>Funcionários</h1>
+</div>
+
+<table>
+    <tr>
+        <th>Nome</th>
+        <th>Cargo</th>
+        <th>Salário</th>
+        <th>Login</th>
+        <th>Ações</th>
+    </tr>
+    <tr>
+        <td>Funcionário 1</td>
+        <td>Cargo 1</td>
+        <td>1000</td>
+        <td>Login1</td>
+        <td class="actions">
+            <span class="delete-button">X</span>
+            <span class="edit-button">&#9998;</span>
+        </td>
+    </tr>
+    <tr>
+        <td>Funcionário 2</td>
+        <td>Cargo 2</td>
+        <td>2000</td>
+        <td>Login2</td>
+        <td class="actions">
+            <span class="delete-button">X</span>
+            <span class="edit-button">&#9998;</span>
+        </td>
+    </tr>
+    <!-- Adicione mais linhas da tabela para cada funcionário -->
+</table>
+
+<a class="btn btn-secondary btn-block btn-xl">Adicionar Funcionário</a>
+ {% endcomment %}
+ <style>
+    /* Estilos CSS para a tabela */
+    table {
+        width: 80%;
+        border-collapse: collapse;
+        margin: 20px auto; /* Centralizar a tabela e adicionar espaço superior */
+        border-top: 1px solid black;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid black; /* Linha preta entre as linhas */
+        border-right: 1px solid black; /* Linha preta entre as colunas */
+    }
+
+    th {
+        background-color: #f2f2f2;
+        border-top: 1px solid black; /* Linha preta na parte superior */
+        border-left: 1px solid black; /* Linha preta no lado esquerdo */
+    }
+
+    td {
+        border-left: 1px solid black; /* Linha preta no lado esquerdo */
+    }
+
+    .edit-button {
+        color: blue;
+        cursor: pointer;
+        margin-left: 5px; /* Espaçamento entre o nome e a caneta */
+    }
+
+    .delete-button {
+        color: red;
+        cursor: pointer;
+        margin-right: 5px; /* Espaçamento entre o X e o nome do funcionário */
+    }
+
+    .name-column div {
+        display: flex;
+        align-items: center; /* Centralizar verticalmente o conteúdo */
+        justify-content: space-between; /* Espaçar o conteúdo */
+    }
+
+    .center-column {
+        text-align: center; /* Centralizar horizontalmente o conteúdo */
+    }
+
+    .btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
+
+</style>
+
+
+
+
+<div style="text-align: center; margin-top: 20px;">
+    <h2>Funcionários</h2>
+</div>
+
+<table>
+    <tr>
+        <th class="center-column">Nome</th>
+        <th class="center-column">Cargo</th>
+        <th class="center-column">Salário</th>
+        <th class="center-column">Login</th>
+    </tr>
+    <tr>
+        <td class="name-column">
+            <div>
+                <span class="delete-button">X</span> Funcionário 1 <span class="edit-button">&#9998;</span>
+            </div>
+        </td>
+        <td class="center-column">Cargo 1</td>
+        <td class="center-column">1000</td>
+        <td class="center-column">Login1</td>
+    </tr>
+    <tr>
+        <td class="name-column">
+            <div>
+                <span class="delete-button">X</span> Funcionário 2 <span class="edit-button">&#9998;</span>
+            </div>
+        </td>
+        <td class="center-column">Cargo 2</td>
+        <td class="center-column">2000</td>
+        <td class="center-column">Login2</td>
+    </tr>
+</table>
+
+<a class="btn btn-secondary btn-block btn-xl">Adicionar Funcionário</a>
+
+
+    
+
+
+{% endblock %}

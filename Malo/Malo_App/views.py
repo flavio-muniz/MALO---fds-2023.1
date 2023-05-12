@@ -293,3 +293,8 @@ def Home_garcom(request):
         'mesa_list':mesa_list,
     })
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def add_garcom(request):
+    return render(request, 'add_garcom.html')
+
