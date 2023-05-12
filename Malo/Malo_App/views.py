@@ -51,6 +51,7 @@ def SignupPage(request):
                 return redirect('signup')   
             else:
                 my_user=User.objects.create_user(uname,email,pass1)
+                
                 my_user.save()
                 return redirect('login') 
         
