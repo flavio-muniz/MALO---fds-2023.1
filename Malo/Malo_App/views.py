@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient, Dish, Category, Mesa, DishIngredient
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory
 from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm
 from django.views.decorators.http import require_POST
@@ -40,7 +40,7 @@ def SignupPage(request):
         pass2=request.POST.get('password2')
 
         if pass1 != pass2:
-            messages.success(request, ("Suas senhas sao divergentes"))
+            messages.success(request, ("Login ou senha inválida"))
             return redirect('signup') 
         else:
             if User.objects.filter(username=uname).exists():
@@ -53,7 +53,11 @@ def SignupPage(request):
                 my_user=User.objects.create_user(uname,email,pass1)
                 
                 my_user.save()
-                return redirect('login') 
+                Group.objects.get_or_create(name='admin')
+                group = Group.objects.get(name='admin')
+                my_user.groups.add(group)
+                    
+                return redirect('login')
         
     return render (request, 'signup.html')
 
@@ -136,16 +140,29 @@ def Add_category(request):
 
 @login_required(login_url='login')
 def Edit_category(request, category_id):
-    category = Category.objects.get(pk = category_id)
+    category = Category.objects.get(pk=category_id)
     form = CategoryForm(request.POST or None, instance=category)
-    if form.is_valid():
-        form.save()
-        messages.success(request, ("Categoria editada com sucesso!"))
-        return redirect('menu_category')
+    dishes = Dish.objects.all()
+    selected_dishes = category.dish_set.all()  # Pratos selecionados para a categoria
 
-    return render(request,'edit_category.html',{
+    if request.method == "POST":
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.save()
+
+            selected_dishes_ids = request.POST.getlist('dishes')
+            selected_dishes = Dish.objects.filter(id__in=selected_dishes_ids)
+
+            category.dish_set.set(selected_dishes)
+
+            messages.success(request, "Categoria editada com sucesso!")
+            return redirect('menu_category')
+
+    return render(request, 'edit_category.html', {
         'category': category,
         'form': form,
+        'dishes': dishes,
+        'selected_dishes': selected_dishes,
     })
 
 @login_required(login_url='login')
