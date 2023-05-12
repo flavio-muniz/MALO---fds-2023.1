@@ -26,11 +26,21 @@
     }
 
     function addPopupIndex(name) {
+<<<<<<< HEAD
         return name + "__" + (popupIndex + 1);
     }
 
     function removePopupIndex(name) {
         return name.replace(new RegExp("__" + (popupIndex + 1) + "$"), '');
+=======
+        name = name + "__" + (popupIndex + 1);
+        return name;
+    }
+
+    function removePopupIndex(name) {
+        name = name.replace(new RegExp("__" + (popupIndex + 1) + "$"), '');
+        return name;
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
     }
 
     function showAdminPopup(triggeringLink, name_regexp, add_popup) {

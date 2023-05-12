@@ -2,24 +2,65 @@
 {
     const toggleNavSidebar = document.getElementById('toggle-nav-sidebar');
     if (toggleNavSidebar !== null) {
+<<<<<<< HEAD
         const navSidebar = document.getElementById('nav-sidebar');
+=======
+        const navLinks = document.querySelectorAll('#nav-sidebar a');
+        function disableNavLinkTabbing() {
+            for (const navLink of navLinks) {
+                navLink.tabIndex = -1;
+            }
+        }
+        function enableNavLinkTabbing() {
+            for (const navLink of navLinks) {
+                navLink.tabIndex = 0;
+            }
+        }
+        function disableNavFilterTabbing() {
+            document.getElementById('nav-filter').tabIndex = -1;
+        }
+        function enableNavFilterTabbing() {
+            document.getElementById('nav-filter').tabIndex = 0;
+        }
+
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
         const main = document.getElementById('main');
         let navSidebarIsOpen = localStorage.getItem('django.admin.navSidebarIsOpen');
         if (navSidebarIsOpen === null) {
             navSidebarIsOpen = 'true';
         }
+<<<<<<< HEAD
         main.classList.toggle('shifted', navSidebarIsOpen === 'true');
         navSidebar.setAttribute('aria-expanded', navSidebarIsOpen);
+=======
+        if (navSidebarIsOpen === 'false') {
+            disableNavLinkTabbing();
+            disableNavFilterTabbing();
+        }
+        main.classList.toggle('shifted', navSidebarIsOpen === 'true');
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
 
         toggleNavSidebar.addEventListener('click', function() {
             if (navSidebarIsOpen === 'true') {
                 navSidebarIsOpen = 'false';
+<<<<<<< HEAD
             } else {
                 navSidebarIsOpen = 'true';
             }
             localStorage.setItem('django.admin.navSidebarIsOpen', navSidebarIsOpen);
             main.classList.toggle('shifted');
             navSidebar.setAttribute('aria-expanded', navSidebarIsOpen);
+=======
+                disableNavLinkTabbing();
+                disableNavFilterTabbing();
+            } else {
+                navSidebarIsOpen = 'true';
+                enableNavLinkTabbing();
+                enableNavFilterTabbing();
+            }
+            localStorage.setItem('django.admin.navSidebarIsOpen', navSidebarIsOpen);
+            main.classList.toggle('shifted');
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
         });
     }
 

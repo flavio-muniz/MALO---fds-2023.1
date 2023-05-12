@@ -1,19 +1,22 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient, Dish, Category, Mesa, DishIngredient
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms.models import modelformset_factory
-from .forms import IngredientForm, DishForm, DishIngredientForm
+from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm
 from django.views.decorators.http import require_POST
+from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
 
 
 @login_required(login_url='login')
+@admin_only
 def HomePage(request):
     return render (request, 'home.html')
 
+@unauth_user
 def login_user(request):
     if request.method=='POST':
         username=request.POST.get('username')
@@ -28,6 +31,7 @@ def login_user(request):
 
     return render (request, 'login.html')
 
+@unauth_user
 def SignupPage(request):
     if request.method=='POST':
         uname=request.POST.get('username')
@@ -56,13 +60,14 @@ def LogoutPage(request):
     logout(request)
     return redirect('login')
 
-
+@login_required(login_url='login')
 def All_ingredient(request):
     ingredient_list = Ingredient.objects.all()
     return render(request,'listadeingredientes.html',{
         'ingredient_list':ingredient_list,
     })
 
+@login_required(login_url='login')
 def Add_ingredient(request):
     submitted = False
     if request.method == "POST":
@@ -77,6 +82,7 @@ def Add_ingredient(request):
             submitted = True
     return render(request, 'add_ingredient.html', {'form': form, 'submitted': submitted})
 
+@login_required(login_url='login')
 def Edit_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(pk = ingredient_id)
     form = IngredientForm(request.POST or None, instance=ingredient)
@@ -90,18 +96,64 @@ def Edit_ingredient(request, ingredient_id):
         'form': form,
     })
 
+@login_required(login_url='login')
 def Delete_ingredient(request, ingredient_id):
     ingredient = Ingredient.objects.get(pk = ingredient_id)
     ingredient.delete()
     return redirect('ingredient_list')
 
-
+@login_required(login_url='login')
 def Menu(request):
     dishes = Dish.objects.all()
     return render(request,'menu.html',{
-        'menu':dishes,
+        'dishes':dishes,
     })
 
+@login_required(login_url='login')
+def Category_menu(request):
+    categories = Category.objects.all()
+    dishes = Dish.objects.all()
+    return render(request,'menu_category.html',{
+        'categories':categories,
+        'dishes':dishes,
+    })
+
+@login_required(login_url='login')
+def Add_category(request):
+    submitted = False
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ("Categoria registrada com sucesso!"))
+            return redirect('menu_category')
+    else:
+        form = CategoryForm
+        if 'submitted' in request.GET:
+            submitted = True
+    return render(request, 'add_category.html', {'form': form, 'submitted': submitted})
+
+@login_required(login_url='login')
+def Edit_category(request, category_id):
+    category = Category.objects.get(pk = category_id)
+    form = CategoryForm(request.POST or None, instance=category)
+    if form.is_valid():
+        form.save()
+        messages.success(request, ("Categoria editada com sucesso!"))
+        return redirect('menu_category')
+
+    return render(request,'edit_category.html',{
+        'category': category,
+        'form': form,
+    })
+
+@login_required(login_url='login')
+def Delete_category(request, category_id):
+    category = Category.objects.get(pk = category_id)
+    category.delete()
+    return redirect('menu_category')
+
+@login_required(login_url='login')
 def Add_dish(request):
     submitted = False
     if request.method == "POST":
@@ -129,6 +181,7 @@ def Add_dish(request):
         'formset': formset,
         })
 
+@login_required(login_url='login')
 def Edit_dish(request, dish_id):
     dish = Dish.objects.get(pk = dish_id)
     form = DishForm(request.POST or None, instance=dish)
@@ -151,17 +204,26 @@ def Edit_dish(request, dish_id):
         'formset': formset,
     })
 
-def Delete_dish(request, dish_id):
+@login_required(login_url='login')
+def Delete_dish(request, dish_id, origin):
     dish = Dish.objects.get(pk = dish_id)
     dish.delete()
-    return redirect('menu')
+    
+    if origin == 'menu':
+        return redirect('menu')
+    elif origin == 'menu_category':
+        return redirect('menu_category')
+    else:
+        return redirect('menu')
 
+@login_required(login_url='login')
 def all_Mesa(request):
     mesa_list = Mesa.objects.all()
     return render(request,'mesa.html',{
         'mesa_list':mesa_list,
     })
 
+@login_required(login_url='login')
 def add_mesa(request):
     if request.method == 'POST':
         numero = Mesa.proximo_numero()
@@ -170,6 +232,7 @@ def add_mesa(request):
         return redirect('mesa')
     return render(request, 'mesa.html')
 
+@login_required(login_url='login')
 def add_mult_mesa(request):
     if request.method == 'POST':
         qtd_mesas = int(request.POST.get('qtd_mesas', 1))
@@ -180,7 +243,7 @@ def add_mult_mesa(request):
         return redirect('mesa')
     return render(request, 'mesa.html')
    
-
+@login_required(login_url='login')
 def delete_mesa(request, id=None):
     mesa = Mesa.objects.order_by('-numero').first()  # Verifica o primeiro objeto Mesa
     if mesa is not None:  # Verifica se teve retorno válido
@@ -190,7 +253,8 @@ def delete_mesa(request, id=None):
     else:
         messages.success(request, ("Não existem mesas para serem removidas!"))
         return redirect('mesa')
-    
+
+@login_required(login_url='login')
 def delete_mult_mesa(request):
     qtd_mesas = int(request.POST.get('qtd_mesas', 0))
     mesas = Mesa.objects.all()
@@ -203,5 +267,11 @@ def delete_mult_mesa(request):
         messages.success(request, ("Mesas insuficientes para serem removidas!"))
         return redirect('mesa')
 
-
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'garçom'])
+def Home_garcom(request):
+    mesa_list = Mesa.objects.all()
+    return render (request, 'home_garcom.html',{
+        'mesa_list':mesa_list,
+    })
 

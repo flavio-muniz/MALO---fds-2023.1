@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 absl-py==1.4.0
 aiosqlite==0.17.0
 anyio==3.6.2
@@ -61,3 +62,10 @@ virtualenv==20.21.0
 virtualenv-clone==0.5.7
 virtualenvwrapper-win==1.2.7
 wcwidth==0.1.9
+=======
+asgiref==3.6.0
+Django==4.2
+Pint==0.20.1
+sqlparse==0.4.3
+tzdata==2023.3
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3

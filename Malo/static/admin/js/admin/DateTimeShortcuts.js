@@ -90,9 +90,16 @@
             }
             message = interpolate(message, [timezoneOffset]);
 
+<<<<<<< HEAD
             const warning = document.createElement('div');
             warning.classList.add('help', warningClass);
             warning.textContent = message;
+=======
+            const warning = document.createElement('span');
+            warning.className = warningClass;
+            warning.textContent = message;
+            inp.parentNode.appendChild(document.createElement('br'));
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
             inp.parentNode.appendChild(warning);
         },
         // Add clock widget to a given field

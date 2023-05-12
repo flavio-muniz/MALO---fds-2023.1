@@ -119,11 +119,19 @@ function findPosY(obj) {
         let result = '', i = 0;
         while (i < format.length) {
             if (format.charAt(i) === '%') {
+<<<<<<< HEAD
                 result += fields[format.charAt(i + 1)];
                 ++i;
             }
             else {
                 result += format.charAt(i);
+=======
+                result = result + fields[format.charAt(i + 1)];
+                ++i;
+            }
+            else {
+                result = result + format.charAt(i);
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
             }
             ++i;
         }

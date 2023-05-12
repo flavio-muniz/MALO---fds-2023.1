@@ -6,7 +6,6 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 
 
-
 class Ingredient(models.Model):
     name = models.CharField('Ingrediente', max_length=120) 
     '''nome do ingrediente'''
@@ -23,8 +22,15 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+    
+class Category(models.Model):
+    name = models.CharField('Categoria', max_length=120)
+    '''Nome da categoria'''
+    def __str__(self):
+        return self.name 
 
 class Dish(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
     name = models.CharField('Nome do prato', max_length=120)
     '''Nome do prato'''
     price = models.FloatField('Preço de venda')
@@ -51,14 +57,6 @@ class DishIngredient(models.Model):
     def __str__(self):
         return self.name
 
-class Category(models.Model):
-    name = models.CharField('Categoria', max_length=120)
-    '''Nome da categoria'''
-    dishes = models.ManyToManyField(Dish, blank=True)
-    '''Pratos na categoria'''
-
-    def __str__(self):
-        return self.name 
 
 class Mesa(models.Model):
     numero = models.IntegerField(unique=True)

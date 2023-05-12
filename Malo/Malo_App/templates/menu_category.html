@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <center>
+        <br/>
+        <h1>Categorias</h1>
+        <br/>
+    </center>
+    <div class="container mt-5">
+        <div class="row">
+          <div class="d-grid gap-2 d-md-block">
+            <div class="d-flex justify-content-between">
+                <div class="col-md-6">
+                    <a href="{% url 'menu' %}" class="btn btn-secondary btn-block btn-xl">Todos os Pratos</a>
+                </div>
+                    <a href="{% url 'add_category' %}" class="btn btn-secondary btn-block btn-xl">Adicionar Categorias</a>
+            </div>
+        </div>
+    </div>
+            
+ 
+      
+        <br/>
+
+        <!-- Adiciona um elemento div com a classe "card-group" para agrupar os cards -->
+        <div class="container text-center">
+            <div class="row ">
+
+                {% for category in categories %}
+                <div class="card d-flex justify-content-center align-items-center col-md-3 mt-3" style="width: 18rem; display: inline-block;">
+                        <div class="card" style="width: 18rem;">
+                            <div class="card-header">
+                                <tr>
+                                    <td align="left">
+                                        <a href="{% url 'edit_category' category.id %}"  class="btn btn-xl "><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/pencil-square.svg" alt="lapis"></a>
+                                    </td>
+                                    <td align="center">
+                                        {{ category }}
+                                    </td>
+                                    <td align="right">
+                                        <a href="{% url 'delete_category' category.id %}" class="btn btn-xl"><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/trash.svg" alt="excluir">
+                                    </td>
+                                </tr>
+                            </div>
+                            {% for dish in dishes %}
+                            <ul class="list-group list-group-flush">
+                                {% if dish.category == category %}
+                                    <li class="list-group-item">
+                                        <tr>
+                                            <td align="left">
+                                                <a href="{% url 'edit_dish' dish.id %}"  class="btn btn-xl "><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/pencil-square.svg" alt="lapis"></a>
+                                            </td>
+                                            <td align="center">
+                                                {{ dish }}
+                                            </td>
+                                            <td align="right">
+                                                <a href="{% url 'delete_dish' dish.id 'menu_category'%}" class="btn btn-xl"><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/trash.svg" alt="excluir">
+                                            </td>
+                                        </tr>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                            {% endfor %}
+                        </div>
+                        <br/>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+        <!-- Fecha o elemento div com a classe "card-group" -->
+
+{% endblock %}

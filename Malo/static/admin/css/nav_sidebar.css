@@ -59,6 +59,7 @@
     content: '\00AB';
 }
 
+<<<<<<< HEAD
 .main > #nav-sidebar {
     visibility: hidden;
 }
@@ -66,6 +67,10 @@
 .main.shifted > #nav-sidebar {
     margin-left: 0;
     visibility: visible;
+=======
+.main.shifted > #nav-sidebar {
+    margin-left: 0;
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
 }
 
 [dir="rtl"] .main.shifted > #nav-sidebar {

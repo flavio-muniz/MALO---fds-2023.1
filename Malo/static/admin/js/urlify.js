@@ -163,7 +163,12 @@
         s = s.replace(/^\s+|\s+$/g, ''); // trim leading/trailing spaces
         s = s.replace(/[-\s]+/g, '-'); // convert spaces to hyphens
         s = s.substring(0, num_chars); // trim to first num_chars chars
+<<<<<<< HEAD
         return s.replace(/-+$/g, ''); // trim any trailing hyphens
+=======
+        s = s.replace(/-+$/g, ''); // trim any trailing hyphens
+        return s;
+>>>>>>> 84708b22f826d25259fa524313d8417ffbf158c3
     }
     window.URLify = URLify;
 }
