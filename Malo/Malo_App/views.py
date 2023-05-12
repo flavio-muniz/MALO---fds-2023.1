@@ -147,7 +147,6 @@ def Edit_category(request, category_id):
 def Delete_category(request, category_id):
     category = Category.objects.get(pk = category_id)
     category.delete()
-    
     return redirect('menu_category')
 
 @login_required(login_url='login')
@@ -202,10 +201,16 @@ def Edit_dish(request, dish_id):
     })
 
 @login_required(login_url='login')
-def Delete_dish(request, dish_id):
+def Delete_dish(request, dish_id, origin):
     dish = Dish.objects.get(pk = dish_id)
     dish.delete()
-    return redirect('menu')
+    
+    if origin == 'menu':
+        return redirect('menu')
+    elif origin == 'menu_category':
+        return redirect('menu_category')
+    else:
+        return redirect('menu')
 
 @login_required(login_url='login')
 def all_Mesa(request):

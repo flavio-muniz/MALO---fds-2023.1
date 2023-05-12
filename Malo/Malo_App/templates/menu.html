@@ -29,7 +29,7 @@
                                 {{ dish }}
                             </td>
                             <td align="right">
-                                <a href="{% url 'delete_dish' dish.id %}" class="btn btn-xl"><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/Media/trash.svg" alt="excluir">
+                                <a href="{% url 'delete_dish' dish.id 'menu' %}" class="btn btn-xl"><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/Media/trash.svg" alt="excluir">
                             </td>
                         </tr>
                         {% endfor %}
