@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Ingredient, Dish, Category, DishIngredient, Order, Garcom
+from .models import Ingredient, Dish, Category, DishIngredient, Order, OrderDish, Garcom
 from django.contrib.auth.models import User, Group
 
 class IngredientForm(ModelForm):
@@ -73,13 +73,21 @@ class CategoryForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Categoria'}),
         }
 
-class AddMesaOrderForm(forms.ModelForm):
+class DishOrderForm(forms.ModelForm):
     class Meta:
-        model = Order
-        fields = ('dish',)
+        model = OrderDish
+        fields = ('dish', 'quantity', 'obs')
+
+        labels = {
+            'dish': 'Produto:',
+            'quantity': 'Quantidade:',
+            'obs': 'Observação:',
+        }
 
         widgets = {
-            'dish': forms.CheckboxSelectMultiple(),
+            'dish': forms.Select(),
+            'quantity': forms.IntegerField(attrs={'class':'form-control', 'placeholder':'Quantidade'}),
+            'obs': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Adicionar Observação'}),
         }
 
 class AddGarcomForm(forms.ModelForm):
@@ -110,3 +118,8 @@ class AddGarcomForm(forms.ModelForm):
     def get_cargo_choices(self):
         group_choices = Group.objects.values_list('name', 'name')
         return [('', 'Selecione o cargo')] + list(group_choices)
+    
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('mesa',)

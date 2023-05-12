@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, Garcom
+from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, OrderDish, Garcom
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory
-from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm, AddMesaOrderForm, AddGarcomForm
+from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, OrderForm,DishOrderForm, AddMesaOrderForm, AddGarcomForm
 from django.views.decorators.http import require_POST
 from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
@@ -322,18 +322,32 @@ def Add_mesa_order(request, mesa_numero):
     dishes = Dish.objects.all()
 
     if request.method == 'POST':
-        form = AddMesaOrderForm(request.POST)
-        if form.is_valid():
+        form = OrderForm(request.POST)
+        DishOrderFormset = modelformset_factory(OrderDish, form=DishOrderForm, extra=0)
+        formset = DishOrderFormset(request.POST, queryset=OrderDish.objects.none())
+        if all([form.is_valid(), formset.is_valid()]):
             order = form.save(commit=False)
             order.mesa = mesa
             order_numero = Order.proximo_numero()
             order.numero = order_numero
             order.save()
-            form.save_m2m()  # Salvar a relação ManyToMany
 
+            for form in formset:
+                dish_order = form.save(commit=False)
+                dish_order.order = order
+                dish_order.save()
+
+            # selected_dishes_ids = request.POST.getlist('dishes')
+            # selected_dishes = Dish.objects.filter(id__in=selected_dishes_ids)
+
+            # dish_order.dish_set.set(selected_dishes)
+
+            messages.success(request, "Pedido realizado com sucesso!")
             return redirect('mesa_orders', mesa_numero=mesa_numero)
     else:
-        form = AddMesaOrderForm()
+        form = OrderForm()
+        DishOrderFormset = modelformset_factory(OrderDish, form=DishOrderForm, extra=0)
+        formset = DishOrderFormset(queryset=OrderDish.objects.none())
 
     return render(request, 'add_mesa_order.html', {
         'mesa': mesa,
