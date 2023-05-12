@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Ingredient, Dish, Category, DishIngredient, Order
+from .models import Ingredient, Dish, Category, DishIngredient, OrderDish, Order
 
 class IngredientForm(ModelForm):
     class Meta:
@@ -72,11 +72,24 @@ class CategoryForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Categoria'}),
         }
 
-class AddMesaOrderForm(forms.ModelForm):
+class DishOrderForm(forms.ModelForm):
     class Meta:
-        model = Order
-        fields = ('dish',)
+        model = OrderDish
+        fields = ('dish', 'quantity', 'obs')
+
+        labels = {
+            'dish': 'Produto:',
+            'quantity': 'Quantidade:',
+            'obs': 'Observação:',
+        }
 
         widgets = {
-            'dish': forms.CheckboxSelectMultiple(),
+            'dish': forms.Select(),
+            'quantity': forms.IntegerField(attrs={'class':'form-control', 'placeholder':'Quantidade'}),
+            'obs': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Adicionar Observação'}),
         }
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ('mesa',)
