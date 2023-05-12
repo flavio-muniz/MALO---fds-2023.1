@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Orders
+from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory
@@ -302,7 +302,7 @@ def add_garcom(request):
 @allowed_users(allowed_roles=['admin', 'garçom'])
 def Mesa_orders(request, mesa_numero):
     mesa = get_object_or_404(Mesa, numero=mesa_numero)
-    orders = Orders.objects.filter(mesa=mesa)
+    orders = Order.objects.filter(mesa=mesa)
     return render(request, 'mesa_orders.html', {
         'mesa': mesa,
         'orders': orders,
@@ -318,7 +318,7 @@ def Add_mesa_order(request, mesa_numero):
         if form.is_valid():
             order = form.save(commit=False)
             order.mesa = mesa
-            order_numero = Orders.proximo_numero()
+            order_numero = Order.proximo_numero()
             order.numero = order_numero
             order.save()
             form.save_m2m()  # Salvar a relação ManyToMany

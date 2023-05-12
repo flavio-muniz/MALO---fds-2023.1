@@ -72,7 +72,7 @@ class Mesa(models.Model):
     def __str__(self):
         return f'Mesa {self.numero}'
 
-class Orders(models.Model):
+class Order(models.Model):
     numero = models.IntegerField(unique=True)
     mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
     dish = models.ManyToManyField(Dish)

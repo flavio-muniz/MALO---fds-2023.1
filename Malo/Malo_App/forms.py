@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Ingredient, Dish, Category, DishIngredient, Orders
+from .models import Ingredient, Dish, Category, DishIngredient, Order
 
 class IngredientForm(ModelForm):
     class Meta:
@@ -74,7 +74,7 @@ class CategoryForm(forms.ModelForm):
 
 class AddMesaOrderForm(forms.ModelForm):
     class Meta:
-        model = Orders
+        model = Order
         fields = ('dish',)
 
         widgets = {
