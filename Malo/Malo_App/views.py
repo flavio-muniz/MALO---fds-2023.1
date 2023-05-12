@@ -135,16 +135,29 @@ def Add_category(request):
 
 @login_required(login_url='login')
 def Edit_category(request, category_id):
-    category = Category.objects.get(pk = category_id)
+    category = Category.objects.get(pk=category_id)
     form = CategoryForm(request.POST or None, instance=category)
-    if form.is_valid():
-        form.save()
-        messages.success(request, ("Categoria editada com sucesso!"))
-        return redirect('menu_category')
+    dishes = Dish.objects.all()
+    selected_dishes = category.dish_set.all()  # Pratos selecionados para a categoria
 
-    return render(request,'edit_category.html',{
+    if request.method == "POST":
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.save()
+
+            selected_dishes_ids = request.POST.getlist('dishes')
+            selected_dishes = Dish.objects.filter(id__in=selected_dishes_ids)
+
+            category.dish_set.set(selected_dishes)
+
+            messages.success(request, "Categoria editada com sucesso!")
+            return redirect('menu_category')
+
+    return render(request, 'edit_category.html', {
         'category': category,
         'form': form,
+        'dishes': dishes,
+        'selected_dishes': selected_dishes,
     })
 
 @login_required(login_url='login')
