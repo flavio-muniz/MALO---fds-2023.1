@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient, Dish, Category, Mesa, DishIngredient
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory
 from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm
 from django.views.decorators.http import require_POST
@@ -40,7 +40,7 @@ def SignupPage(request):
         pass2=request.POST.get('password2')
 
         if pass1 != pass2:
-            messages.success(request, ("Suas senhas sao divergentes"))
+            messages.success(request, ("Login ou senha inválida"))
             return redirect('signup') 
         else:
             if User.objects.filter(username=uname).exists():
@@ -52,7 +52,11 @@ def SignupPage(request):
             else:
                 my_user=User.objects.create_user(uname,email,pass1)
                 my_user.save()
-                return redirect('login') 
+                Group.objects.get_or_create(name='admin')
+                group = Group.objects.get(name='admin')
+                my_user.groups.add(group)
+                    
+                return redirect('login')
         
     return render (request, 'signup.html')
 
