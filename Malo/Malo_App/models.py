@@ -86,4 +86,11 @@ class Order(models.Model):
     def __str__(self):
         return f'Pedido {self.numero}'
 
+class Garcom(models.Model):
+    nome = models.CharField('Nome', max_length=120)
+    cargo = models.CharField('Cargo', max_length=120)
+    salario = models.DecimalField('Salário', max_digits=8, decimal_places=2)
+    login = models.CharField('Login', max_length=120)
 
+    def __str__(self):
+        return self.nome

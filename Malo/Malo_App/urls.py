@@ -24,9 +24,15 @@ urlpatterns = [
     path('delete_mesa', views.delete_mesa, name='delete_mesa'),
     path('delete_mult_mesa/', views.delete_mult_mesa, name='delete_mult_mesa'),
     path('home-garcom/', views.Home_garcom, name='home_garcom'),
+    path('edit_garcom/', views.edit_garcom, name='edit_garcom'),
     path('add_garcom/', views.add_garcom, name='add_garcom'),
     path('mesa-orders/<mesa_numero>', views.Mesa_orders, name='mesa_orders'),
     path('add-mesa-order/<mesa_numero>', views.Add_mesa_order, name='add_mesa_order'),
+    path('garcom_list/', views.edit_garcom, name='garcom_list'),
+    path('edit_garcom/<int:garcom_id>/', views.edit_garcom_detail, name='edit_garcom_detail'),
+
+
+
     
     
    

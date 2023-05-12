@@ -1,11 +1,11 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order
+from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, Garcom
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory
-from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm, AddMesaOrderForm
+from .forms import IngredientForm, DishForm, DishIngredientForm,CategoryForm, AddMesaOrderForm, AddGarcomForm
 from django.views.decorators.http import require_POST
 from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
@@ -53,9 +53,12 @@ def SignupPage(request):
                 my_user=User.objects.create_user(uname,email,pass1)
                 
                 my_user.save()
-                Group.objects.get_or_create(name='admin')
-                group = Group.objects.get(name='admin')
-                my_user.groups.add(group)
+                try:
+                    Group.objects.get(name='admin')
+                except:
+                    Group.objects.get_or_create(name='admin')
+                    group = Group.objects.get(name='admin')
+                    my_user.groups.add(group)
                     
                 return redirect('login')
         
@@ -295,6 +298,11 @@ def Home_garcom(request):
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
+def edit_garcom(request):
+    return render(request, 'edit_garcom.html')
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
 def add_garcom(request):
     return render(request, 'add_garcom.html')
 
@@ -332,3 +340,61 @@ def Add_mesa_order(request, mesa_numero):
         'dishes': dishes,
         'form': form,
     })
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def add_garcom(request):
+    if request.method == 'POST':
+        form = AddGarcomForm(request.POST)
+        if form.is_valid():
+            user = form.cleaned_data['login']
+            group_name = form.cleaned_data['cargo']
+            garcom = form.save(commit=False)
+            garcom.user = user
+            garcom.save()
+            group = Group.objects.get(name=group_name)
+            user.groups.add(group)
+            messages.success(request, "Funcionário adicionado com sucesso!")
+            return redirect('garcom_list')
+    else:
+        form = AddGarcomForm()
+    return render(request, 'add_garcom.html', {'form': form})
+# def add_garcom(request):
+#     if request.method == 'POST':
+#         form = AddGarcomForm(request.POST)
+#         if form.is_valid():
+#             garcom = form.save()
+#             return redirect('garcom_list')
+#     else:
+#         form = AddGarcomForm()
+#     return render(request, 'add_garcom.html', {'form': form})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def edit_garcom(request):
+    garcoms = Garcom.objects.all()
+    if request.method == 'POST':
+        form = AddGarcomForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Funcionário adicionado com sucesso!")
+            return redirect('edit_garcom')
+    else:
+        form = AddGarcomForm()
+    
+    return render(request, 'edit_garcom.html', {'garcoms': garcoms, 'form': form})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def edit_garcom_detail(request, garcom_id):
+    garcom = get_object_or_404(Garcom, id=garcom_id)
+    if request.method == 'POST':
+        form = AddGarcomForm(request.POST, instance=garcom)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Funcionário editado com sucesso!")
+            return redirect('edit_garcom')
+    else:
+        form = AddGarcomForm(instance=garcom)
+
+    return render(request, 'edit_garcom_detail.html', {'form': form, 'garcom': garcom})

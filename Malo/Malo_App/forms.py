@@ -1,6 +1,7 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Ingredient, Dish, Category, DishIngredient, Order
+from .models import Ingredient, Dish, Category, DishIngredient, Order, Garcom
+from django.contrib.auth.models import User, Group
 
 class IngredientForm(ModelForm):
     class Meta:
@@ -80,3 +81,32 @@ class AddMesaOrderForm(forms.ModelForm):
         widgets = {
             'dish': forms.CheckboxSelectMultiple(),
         }
+
+class AddGarcomForm(forms.ModelForm):
+    cargo = forms.ChoiceField(choices=(), required=True)
+    login = forms.ModelChoiceField(queryset=User.objects.all(), empty_label="Selecione um login", required=True)
+
+    class Meta:
+        model = Garcom
+        fields = ('nome', 'cargo', 'salario', 'login')
+
+        labels = {
+            'nome': 'Nome:',
+            'cargo': 'Cargo:',
+            'salario': 'Salário:',
+            'login': 'Login:',
+        }
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nome'}),
+            'cargo': forms.Select(attrs={'class': 'form-control'}),
+            'salario': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Salário'}),
+            'login': forms.Select(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AddGarcomForm, self).__init__(*args, **kwargs)
+        self.fields['cargo'].choices = self.get_cargo_choices()
+
+    def get_cargo_choices(self):
+        group_choices = Group.objects.values_list('name', 'name')
+        return [('', 'Selecione o cargo')] + list(group_choices)
