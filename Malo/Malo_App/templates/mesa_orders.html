@@ -1,17 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Pedidos da Mesa {{ mesa.numero }}</h1>
+  <h1>Pedidos da Mesa {{ mesa }}</h1>
   <ul>
     {% for order in orders %}
       <li>{{ order }}</li>
-      <ul>
-        {% for dish in order.dish.all %}
-          <li>{{ dish }}</li>
-        {% empty %}
-          <li>Nenhum prato encontrado.</li>
-        {% endfor %}
-      </ul>
     {% empty %}
       <li>Nenhum pedido encontrado.</li>
     {% endfor %}
