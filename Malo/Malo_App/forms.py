@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import Ingredient, Dish, Category, DishIngredient
+from .models import Ingredient, Dish, Category, DishIngredient, Orders
 
 class IngredientForm(ModelForm):
     class Meta:
@@ -72,3 +72,11 @@ class CategoryForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Categoria'}),
         }
 
+class AddMesaOrderForm(forms.ModelForm):
+    class Meta:
+        model = Orders
+        fields = ('dish',)
+
+        widgets = {
+            'dish': forms.CheckboxSelectMultiple(),
+        }

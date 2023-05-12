@@ -72,3 +72,18 @@ class Mesa(models.Model):
     def __str__(self):
         return f'Mesa {self.numero}'
 
+class Orders(models.Model):
+    numero = models.IntegerField(unique=True)
+    mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
+    dish = models.ManyToManyField(Dish)
+
+    @classmethod
+    def proximo_numero(cls):
+        ultimo_pedido = cls.objects.order_by('-numero').first()
+        numero = ultimo_pedido.numero + 1 if ultimo_pedido else 1
+        return numero
+
+    def __str__(self):
+        return f'Pedido {self.numero}'
+
+

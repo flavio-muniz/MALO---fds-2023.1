@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Pedidos da Mesa {{ mesa }}</h1>
+  <ul>
+    {% for order in orders %}
+      <li>{{ order }}</li>
+    {% empty %}
+      <li>Nenhum pedido encontrado.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
