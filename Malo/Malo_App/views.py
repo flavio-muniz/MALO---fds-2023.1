@@ -54,8 +54,10 @@ def SignupPage(request):
                 
                 my_user.save()
                 try:
+                    Group.objects.get_or_create(name='garçom')
                     Group.objects.get(name='admin')
                 except:
+                    Group.objects.get_or_create(name='garçom')
                     Group.objects.get_or_create(name='admin')
                     group = Group.objects.get(name='admin')
                     my_user.groups.add(group)
@@ -330,7 +332,10 @@ def Mesa_orders(request, mesa_numero):
         order.save()
 
     if not orders:
-        return render(request, 'mesa_orders.html', {'mesa': mesa})
+        return render(request, 'mesa_orders.html', {
+            'mesa': mesa,
+            'dishes' : dishes,
+            })
 
     return render(request, 'mesa_orders.html', {
         'mesa': mesa,
