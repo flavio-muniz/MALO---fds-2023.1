@@ -39,6 +39,24 @@
 <h1>Pedidos da Mesa {{ mesa.numero }}</h1>
 <h5>Preço Total Global: R$ {{ total_price_global }}</h5>
 
+<ul>
+  {% for order in orders %}
+    <li>{{ order }}</li>
+    <ul>
+      {% for order_dish in order.orderdish_set.all %}
+        <li>{{ order_dish.dish.name }}</li>
+        <li>Quantidade: {{ order_dish.quantity }}</li>
+        <li>Observação: {{ order_dish.obs }}</li>
+        <li>Preço: R$ {{ order_dish.dish.price }}</li>
+        <br>
+      {% endfor %}
+      <li>Preço local: {{ order.total_price_local }}</li> 
+    </ul>
+    <br>
+  {% empty %}
+    <li>Nenhum pedido encontrado.</li>
+  {% endfor %}
+</ul>
 
 <button id="btn-pedido" class="btn-secondary">Adicionar pedido</button>
 <form method="POST" action="">
@@ -124,26 +142,6 @@
     btnPedido.textContent = 'Adicionar pedido';
   });
 </script>
-
-
-<ul>
-  {% for order in orders %}
-    <li>{{ order }}</li>
-    <ul>
-      {% for order_dish in order.orderdish_set.all %}
-        <li>{{ order_dish.dish.name }}</li>
-        <li>Quantidade: {{ order_dish.quantity }}</li>
-        <li>Observação: {{ order_dish.obs }}</li>
-        <li>Preço: R$ {{ order_dish.dish.price }}</li>
-        <br>
-      {% endfor %}
-      <li>Preço local: {{ order.total_price_local }}</li> 
-    </ul>
-    <br>
-  {% endfor %}
-</ul>
-
-
 
 {% endblock %}
 
