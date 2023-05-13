@@ -1,10 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Pedidos da Mesa {{ mesa }}</h1>
+  <h1>Pedidos da Mesa {{ mesa.numero }}</h1>
   <ul>
     {% for order in orders %}
       <li>{{ order }}</li>
+      <ul>
+        {% for order_dish in order.orderdish_set.all %}
+          <li>{{ order_dish }}</li>
+          <li>Quantidade: {{ order_dish.quantity }}</li>
+          <li>Observação: {{ order_dish.obs }}</li>
+          <li>Preço: R$ {{ order_dish.dish.price }}</li>
+          <br>
+        {% endfor %}
+        <li>Preço Total: {{ order.total_price }}</li> 
+      </ul>
+      <br>
     {% empty %}
       <li>Nenhum pedido encontrado.</li>
     {% endfor %}

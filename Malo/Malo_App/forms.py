@@ -73,23 +73,6 @@ class CategoryForm(forms.ModelForm):
             'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Categoria'}),
         }
 
-class DishOrderForm(forms.ModelForm):
-    class Meta:
-        model = OrderDish
-        fields = ('dish', 'quantity', 'obs')
-
-        labels = {
-            'dish': 'Produto:',
-            'quantity': 'Quantidade:',
-            'obs': 'Observação:',
-        }
-
-        widgets = {
-            'dish': forms.Select(),
-            'quantity': forms.IntegerField(attrs={'class':'form-control', 'placeholder':'Quantidade'}),
-            'obs': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Adicionar Observação'}),
-        }
-
 class AddGarcomForm(forms.ModelForm):
     cargo = forms.ChoiceField(choices=(), required=True)
     login = forms.ModelChoiceField(queryset=User.objects.all(), empty_label="Selecione um login", required=True)
@@ -119,7 +102,12 @@ class AddGarcomForm(forms.ModelForm):
         group_choices = Group.objects.values_list('name', 'name')
         return [('', 'Selecione o cargo')] + list(group_choices)
     
-class OrderForm(forms.ModelForm):
+class AddMesaOrderForm(forms.ModelForm):
     class Meta:
-        model = Order
-        fields = ('mesa',)
+        model = OrderDish
+        fields = ('dish',)
+
+
+        widgets = {
+            'dish': forms.CheckboxSelectMultiple(),
+        }

@@ -75,7 +75,7 @@ class Mesa(models.Model):
 class Order(models.Model):
     numero = models.IntegerField(unique=True)
     mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
-    total_price = models.FloatField('Preço Total')
+    total_price = models.FloatField('Preço Total', default=0)
 
     @classmethod
     def proximo_numero(cls):
@@ -94,12 +94,12 @@ class Garcom(models.Model):
 
     def __str__(self):
         return self.nome
+    
 class OrderDish(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
-    quantity = models.IntegerField('Quantidade')
+    quantity = models.PositiveBigIntegerField(default=1)
     obs = models.TextField('Observação', blank=True, null=True)
 
-    @classmethod
     def __str__(self):
-        return self.dish
+        return str(self.dish)
