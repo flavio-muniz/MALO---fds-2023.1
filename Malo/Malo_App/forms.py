@@ -70,7 +70,7 @@ class CategoryForm(forms.ModelForm):
             'name': 'Categoria:',
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Categoria'}),
+            'name': forms.TextInput(attrs={'class':'categoria form-control', 'placeholder':'Categoria'}),
         }
 
 class AddGarcomForm(forms.ModelForm):
