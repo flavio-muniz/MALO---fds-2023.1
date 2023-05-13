@@ -2,6 +2,7 @@
 
 {% block content %}
   <h1>Pedidos da Mesa {{ mesa.numero }}</h1>
+  <h5>Preço Total Global: R$ {{ total_price_global }}</h5>
   <ul>
     {% for order in orders %}
       <li>{{ order }}</li>
@@ -13,7 +14,7 @@
           <li>Preço: R$ {{ order_dish.dish.price }}</li>
           <br>
         {% endfor %}
-        <li>Preço Total: {{ order.total_price }}</li> 
+        <li>Preço local: {{ order.total_price_local }}</li> 
       </ul>
       <br>
     {% empty %}

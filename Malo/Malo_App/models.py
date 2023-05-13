@@ -75,7 +75,7 @@ class Mesa(models.Model):
 class Order(models.Model):
     numero = models.IntegerField(unique=True)
     mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
-    total_price = models.FloatField('Preço Total', default=0)
+    total_price_local = models.FloatField(default=0)
 
     @classmethod
     def proximo_numero(cls):

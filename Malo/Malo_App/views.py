@@ -312,21 +312,27 @@ def Mesa_orders(request, mesa_numero):
     mesa = get_object_or_404(Mesa, numero=mesa_numero)
     orders = Order.objects.filter(mesa=mesa)
 
+    total_price_global = 0
+
     for order in orders:
-        total_price = 0
         order_dishes = OrderDish.objects.filter(order=order)
+        total_price_local = 0
 
         for order_dish in order_dishes:
             dish_price = order_dish.dish.price
             quantity = order_dish.quantity
-            total_price += dish_price * quantity
+            total_price_local += dish_price * quantity
+        
+        total_price_global += total_price_local
 
-        order.total_price = total_price
+        order.total_price_local = total_price_local
         order.save()
 
     return render(request, 'mesa_orders.html', {
         'mesa': mesa,
         'orders': orders,
+        'total_price_local': total_price_local,
+        'total_price_global': total_price_global,
     })
 
 
