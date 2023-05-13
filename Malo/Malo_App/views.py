@@ -5,7 +5,7 @@ from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, Ord
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory
-from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddGarcomForm
+from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddGarcomForm, OrderForm
 from django.views.decorators.http import require_POST
 from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
@@ -344,6 +344,38 @@ def Mesa_orders(request, mesa_numero):
         'total_price_global': total_price_global,
         'dishes' : dishes,
     })
+
+@login_required(login_url='login')
+def Add_order(request):
+    if request.method == 'POST':
+        mesa_numero = request.POST.get('mesa_numero')  # Obtém o número da mesa a partir do formulário
+        numero = Order.proximo_numero()
+        order = Order(numero=numero)
+
+        if mesa_numero:
+            mesa = Mesa.objects.get(numero=mesa_numero)
+            order.mesa = mesa
+
+        order.save()
+        return redirect('conteudo_order')
+    return render(request, 'mesa_orders.html')
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin','garçom'])
+def conteudo_order(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            messages.success(request, "Pedido adicionado com sucesso!")
+            return redirect('mesa_orders')
+            #return redirect('mesa_orders', mesa_numero=mesa_numero)
+    else:
+        form = OrderForm()
+    return render(request, 'conteudo-order.html', {'form': form})
+
+
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])

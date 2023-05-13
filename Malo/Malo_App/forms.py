@@ -70,8 +70,27 @@ class CategoryForm(forms.ModelForm):
             'name': 'Categoria:',
         }
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Categoria'}),
+            'name': forms.TextInput(attrs={'class':'categoria form-control', 'placeholder':'Categoria'}),
         }
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = OrderDish
+        fields =('order','dish','quantity','obs')
+        
+        labels = {
+            'category': 'Categoria:',
+            'dish': 'Nome do prato:',
+            'quantity': 'Quantidade:',
+            'obs': 'Observação:',
+        }
+        widgets = {
+            'category': forms.Select(attrs={'class':'form-control', 'placeholder':'Categoria'}),
+            'dish': forms.Select(attrs={'class':'form-control', 'placeholder':'Prato'}),
+            'quantity': forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Quantidade'}),
+            'obs': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Descrição no cardápio'}),
+        }
+
 
 class AddGarcomForm(forms.ModelForm):
     cargo = forms.ChoiceField(choices=(), required=True)
