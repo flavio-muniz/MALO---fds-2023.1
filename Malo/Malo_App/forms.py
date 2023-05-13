@@ -102,12 +102,3 @@ class AddGarcomForm(forms.ModelForm):
         group_choices = Group.objects.values_list('name', 'name')
         return [('', 'Selecione o cargo')] + list(group_choices)
     
-class AddMesaOrderForm(forms.ModelForm):
-    class Meta:
-        model = OrderDish
-        fields = ('dish',)
-
-
-        widgets = {
-            'dish': forms.CheckboxSelectMultiple(),
-        }

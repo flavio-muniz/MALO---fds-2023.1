@@ -5,7 +5,7 @@ from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, Ord
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory
-from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddMesaOrderForm, AddGarcomForm
+from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddGarcomForm
 from django.views.decorators.http import require_POST
 from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
@@ -309,6 +309,7 @@ def add_garcom(request):
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin', 'garçom'])
 def Mesa_orders(request, mesa_numero):
+    dishes =  Dish.objects.all()
     mesa = get_object_or_404(Mesa, numero=mesa_numero)
     orders = Order.objects.filter(mesa=mesa)
 
@@ -336,32 +337,7 @@ def Mesa_orders(request, mesa_numero):
         'orders': orders,
         'total_price_local': total_price_local,
         'total_price_global': total_price_global,
-    })
-
-
-@login_required(login_url='login')
-def Add_mesa_order(request, mesa_numero):
-    mesa = get_object_or_404(Mesa, numero=mesa_numero)
-    dishes = Dish.objects.all()
-
-    if request.method == 'POST':
-        form = AddMesaOrderForm(request.POST)
-        if form.is_valid():
-            order = form.save(commit=False)
-            order.mesa = mesa
-            order_numero = Order.proximo_numero()
-            order.numero = order_numero
-            order.save()
-            form.save_m2m()  # Salvar a relação ManyToMany
-
-            return redirect('mesa_orders', mesa_numero=mesa_numero)
-    else:
-        form = AddMesaOrderForm()
-
-    return render(request, 'add_mesa_order.html', {
-        'mesa': mesa,
-        'dishes': dishes,
-        'form': form,
+        'dishes' : dishes,
     })
 
 @login_required(login_url='login')
