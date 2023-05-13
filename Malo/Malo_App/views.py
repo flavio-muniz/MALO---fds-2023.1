@@ -328,6 +328,9 @@ def Mesa_orders(request, mesa_numero):
         order.total_price_local = total_price_local
         order.save()
 
+    if not orders:
+        return render(request, 'mesa_orders.html', {'mesa': mesa})
+
     return render(request, 'mesa_orders.html', {
         'mesa': mesa,
         'orders': orders,
