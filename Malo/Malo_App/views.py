@@ -56,6 +56,7 @@ def SignupPage(request):
                 try:
                     Group.objects.get(name='admin')
                 except:
+                    Group.objects.get_or_create(name='garçom')
                     Group.objects.get_or_create(name='admin')
                     group = Group.objects.get(name='admin')
                     my_user.groups.add(group)
