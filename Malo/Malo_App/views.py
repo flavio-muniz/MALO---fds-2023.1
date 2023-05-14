@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404, reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, OrderDish, Garcom
@@ -340,6 +340,21 @@ def Mesa_orders(request, mesa_numero):
         'dishes' : dishes,
     })
 
+# @login_required(login_url='login')
+# def Add_order(request):
+#     if request.method == 'POST':
+#         mesa_numero = request.POST.get('mesa_numero')  # Obtém o número da mesa a partir do formulário
+#         numero = Order.proximo_numero()
+#         order = Order(numero=numero)
+
+#         if mesa_numero:
+#             mesa = Mesa.objects.get(numero=mesa_numero)
+#             order.mesa = mesa
+
+#         order.save()
+#         return redirect('conteudo_order')
+#     return render(request, 'mesa_orders.html')
+
 @login_required(login_url='login')
 def Add_order(request):
     if request.method == 'POST':
@@ -352,23 +367,45 @@ def Add_order(request):
             order.mesa = mesa
 
         order.save()
-        return redirect('conteudo_order')
+        return redirect(reverse('conteudo_order', kwargs={'mesa_numero': mesa_numero}))
     return render(request, 'mesa_orders.html')
 
 
+
+# @login_required(login_url='login')
+# @allowed_users(allowed_roles=['admin','garçom'])
+# def conteudo_order(request):
+#     if request.method == 'POST':
+#         form = OrderForm(request.POST)
+#         if form.is_valid():
+#             messages.success(request, "Pedido adicionado com sucesso!")
+#             return redirect('mesa_orders')
+            
+#     else:
+#         form = OrderForm()
+#     return render(request, 'conteudo-order.html', {'form': form})
+
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin','garçom'])
-def conteudo_order(request):
+@allowed_users(allowed_roles=['admin', 'garçom'])
+def conteudo_order(request, mesa_numero):
+    mesa = get_object_or_404(Mesa, numero=mesa_numero)
+
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
+            order = form.save(commit=False)
+            order.mesa = mesa
+            order.save()
             messages.success(request, "Pedido adicionado com sucesso!")
-            return redirect('mesa_orders')
-            #return redirect('mesa_orders', mesa_numero=mesa_numero)
+            return redirect(reverse('mesa_orders', kwargs={'mesa_numero': mesa_numero}))
     else:
         form = OrderForm()
+    
     return render(request, 'conteudo-order.html', {'form': form})
 
+
+
+# return redirect('mesa_orders', mesa_numero=mesa_numero)
 
 
 
