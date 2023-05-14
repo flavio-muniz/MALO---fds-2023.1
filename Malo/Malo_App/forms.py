@@ -79,13 +79,13 @@ class OrderForm(forms.ModelForm):
         fields =('order','dish','quantity','obs')
         
         labels = {
-            'category': 'Categoria:',
+            'order': 'Nº do Pedido:',
             'dish': 'Nome do prato:',
             'quantity': 'Quantidade:',
             'obs': 'Observação:',
         }
         widgets = {
-            'category': forms.Select(attrs={'class':'form-control', 'placeholder':'Categoria'}),
+            'order': forms.Select(attrs={'class':'form-control', 'placeholder':'Nº Pedido','disabled': 'disabled'}),
             'dish': forms.Select(attrs={'class':'form-control', 'placeholder':'Prato'}),
             'quantity': forms.NumberInput(attrs={'class':'form-control', 'placeholder':'Quantidade'}),
             'obs': forms.Textarea(attrs={'class':'form-control', 'placeholder':'Descrição no cardápio'}),
