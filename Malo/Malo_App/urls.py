@@ -29,6 +29,7 @@ urlpatterns = [
     path('mesa-orders/<mesa_numero>', views.Mesa_orders, name='mesa_orders'),
     path('add-order/', views.Add_order, name='add_order'),
     path('conteudo-order/<int:mesa_numero>/<int:numero_pedido>/', views.conteudo_order, name='conteudo_order'),
+    path('close-order/<int:mesa_numero>/', views.Close_orders, name='close_orders'),
     path('garcom_list/', views.edit_garcom, name='garcom_list'),
     path('edit_garcom/<int:garcom_id>/', views.edit_garcom_detail, name='edit_garcom_detail'),
 

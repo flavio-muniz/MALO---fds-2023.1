@@ -377,6 +377,50 @@ def conteudo_order(request, mesa_numero, numero_pedido):
 
     return render(request, 'conteudo-order.html', {'form': form})
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'garçom'])
+def Close_orders(request, mesa_numero):
+    dishes =  Dish.objects.all()
+    mesa = get_object_or_404(Mesa, numero=mesa_numero)
+    orders = Order.objects.filter(mesa=mesa)
+
+    if request.method == 'POST':
+        orders.delete()
+        subtotal = 0
+
+        messages.success(request, "Pedido fechado com sucesso!")
+        return redirect('home')
+
+    else:
+        subtotal = 0
+
+        for order in orders:
+            order_dishes = OrderDish.objects.filter(order=order)
+            total_price_local = 0
+
+            for order_dish in order_dishes:
+                dish_price = order_dish.dish.price
+                quantity = order_dish.quantity
+                total_price_local += dish_price * quantity
+            
+            subtotal += total_price_local
+            services = subtotal * 0.1
+            total = subtotal + services
+
+            order.total_price_local = total_price_local
+
+    if not orders:
+        return render(request, 'close_orders.html', {'mesa': mesa})
+
+    return render(request, 'close_orders.html', {
+        'mesa': mesa,
+        'orders': orders,
+        'total_price_local': total_price_local,
+        'subtotal': subtotal,
+        'services': services,
+        'total': total,
+        'dishes' : dishes,
+    })
 
 
 @login_required(login_url='login')
