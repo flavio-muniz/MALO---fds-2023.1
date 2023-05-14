@@ -1,11 +1,11 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,redirect,get_object_or_404, reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, OrderDish, Garcom
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
-from django.forms.models import modelformset_factory
-from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddGarcomForm
+from django.forms.models import modelformset_factory, inlineformset_factory
+from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddGarcomForm, OrderForm
 from django.views.decorators.http import require_POST
 from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
@@ -56,6 +56,7 @@ def SignupPage(request):
                 try:
                     Group.objects.get(name='admin')
                 except:
+                    Group.objects.get_or_create(name='garçom')
                     Group.objects.get_or_create(name='admin')
                     group = Group.objects.get(name='admin')
                     my_user.groups.add(group)
@@ -339,6 +340,88 @@ def Mesa_orders(request, mesa_numero):
         'total_price_global': total_price_global,
         'dishes' : dishes,
     })
+
+@login_required(login_url='login')
+def Add_order(request):
+    if request.method == 'POST':
+        mesa_numero = request.POST.get('mesa_numero')  # Obtém o número da mesa a partir do formulário
+        numero = Order.proximo_numero()
+        order = Order(numero=numero)
+
+        if mesa_numero:
+            mesa = Mesa.objects.get(numero=mesa_numero)
+            order.mesa = mesa
+
+        order.save()
+        return redirect(reverse('conteudo_order', kwargs={'mesa_numero': mesa_numero, 'numero_pedido': order.numero}))
+    return render(request, 'mesa_orders.html')
+
+
+
+@login_required(login_url='login')
+def conteudo_order(request, mesa_numero, numero_pedido):
+    mesa = get_object_or_404(Mesa, numero=mesa_numero)
+    order = Order.objects.get(numero=numero_pedido)
+
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order_dish = form.save(commit=False)
+            order_dish.order = order
+            order_dish.save()
+            form.save_m2m()  # Salvar relações ManyToMany
+            messages.success(request, "Pedido adicionado com sucesso!")
+            return redirect(reverse('mesa_orders', kwargs={'mesa_numero': mesa_numero}))
+    else:
+        form = OrderForm(initial={'order': order})
+
+    return render(request, 'conteudo-order.html', {'form': form})
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin', 'garçom'])
+def Close_orders(request, mesa_numero):
+    dishes =  Dish.objects.all()
+    mesa = get_object_or_404(Mesa, numero=mesa_numero)
+    orders = Order.objects.filter(mesa=mesa)
+
+    if request.method == 'POST':
+        orders.delete()
+        subtotal = 0
+
+        messages.success(request, "Pedido fechado com sucesso!")
+        return redirect('home')
+
+    else:
+        subtotal = 0
+
+        for order in orders:
+            order_dishes = OrderDish.objects.filter(order=order)
+            total_price_local = 0
+
+            for order_dish in order_dishes:
+                dish_price = order_dish.dish.price
+                quantity = order_dish.quantity
+                total_price_local += dish_price * quantity
+            
+            subtotal += total_price_local
+            services = subtotal * 0.1
+            total = subtotal + services
+
+            order.total_price_local = total_price_local
+
+    if not orders:
+        return render(request, 'close_orders.html', {'mesa': mesa})
+
+    return render(request, 'close_orders.html', {
+        'mesa': mesa,
+        'orders': orders,
+        'total_price_local': total_price_local,
+        'subtotal': subtotal,
+        'services': services,
+        'total': total,
+        'dishes' : dishes,
+    })
+
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
