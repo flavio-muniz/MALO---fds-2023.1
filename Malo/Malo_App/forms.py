@@ -85,7 +85,7 @@ class OrderForm(forms.ModelForm):
             'obs': 'Observação:',
         }
         widgets = {
-            'order': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Nº Pedido', 'readonly': 'readonly'}),
+            'order': forms.HiddenInput(),
             'dish': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Prato'}),
             'quantity': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Quantidade'}),
             'obs': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descrição no cardápio'}),
