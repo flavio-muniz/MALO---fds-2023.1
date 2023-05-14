@@ -74,7 +74,7 @@ class Mesa(models.Model):
 
 class Order(models.Model):
     numero = models.IntegerField(unique=True)
-    mesa = models.ForeignKey(Mesa, on_delete=models.SET_NULL, null=True, blank=True)
+    mesa = models.ForeignKey(Mesa, on_delete=models.CASCADE, null=True, blank=True)
     total_price_local = models.FloatField(default=0)
 
     @classmethod

@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, OrderDish, Garcom
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
-from django.forms.models import modelformset_factory
+from django.forms.models import modelformset_factory, inlineformset_factory
 from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddGarcomForm, OrderForm
 from django.views.decorators.http import require_POST
 from .decorators import unauth_user, allowed_users, admin_only
@@ -375,10 +375,6 @@ def conteudo_order(request, mesa_numero, numero_pedido):
         form = OrderForm(initial={'order': order})
 
     return render(request, 'conteudo-order.html', {'form': form})
-
-
-
-
 
 
 
