@@ -340,21 +340,6 @@ def Mesa_orders(request, mesa_numero):
         'dishes' : dishes,
     })
 
-# @login_required(login_url='login')
-# def Add_order(request):
-#     if request.method == 'POST':
-#         mesa_numero = request.POST.get('mesa_numero')  # Obtém o número da mesa a partir do formulário
-#         numero = Order.proximo_numero()
-#         order = Order(numero=numero)
-
-#         if mesa_numero:
-#             mesa = Mesa.objects.get(numero=mesa_numero)
-#             order.mesa = mesa
-
-#         order.save()
-#         return redirect('conteudo_order')
-#     return render(request, 'mesa_orders.html')
-
 @login_required(login_url='login')
 def Add_order(request):
     if request.method == 'POST':
@@ -367,45 +352,33 @@ def Add_order(request):
             order.mesa = mesa
 
         order.save()
-        return redirect(reverse('conteudo_order', kwargs={'mesa_numero': mesa_numero}))
+        return redirect(reverse('conteudo_order', kwargs={'mesa_numero': mesa_numero, 'numero_pedido': order.numero}))
     return render(request, 'mesa_orders.html')
 
 
 
-# @login_required(login_url='login')
-# @allowed_users(allowed_roles=['admin','garçom'])
-# def conteudo_order(request):
-#     if request.method == 'POST':
-#         form = OrderForm(request.POST)
-#         if form.is_valid():
-#             messages.success(request, "Pedido adicionado com sucesso!")
-#             return redirect('mesa_orders')
-            
-#     else:
-#         form = OrderForm()
-#     return render(request, 'conteudo-order.html', {'form': form})
-
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['admin', 'garçom'])
-def conteudo_order(request, mesa_numero):
+def conteudo_order(request, mesa_numero, numero_pedido):
     mesa = get_object_or_404(Mesa, numero=mesa_numero)
+    order = Order.objects.get(numero=numero_pedido)
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            order = form.save(commit=False)
-            order.mesa = mesa
-            order.save()
+            order_dish = form.save(commit=False)
+            order_dish.order = order
+            order_dish.save()
+            form.save_m2m()  # Salvar relações ManyToMany
             messages.success(request, "Pedido adicionado com sucesso!")
             return redirect(reverse('mesa_orders', kwargs={'mesa_numero': mesa_numero}))
     else:
-        form = OrderForm()
-    
+        form = OrderForm(initial={'order': order})
+
     return render(request, 'conteudo-order.html', {'form': form})
 
 
 
-# return redirect('mesa_orders', mesa_numero=mesa_numero)
+
 
 
 
