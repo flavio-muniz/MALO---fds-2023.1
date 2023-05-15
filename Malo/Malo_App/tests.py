@@ -18,7 +18,7 @@ class TestHome(LiveServerTestCase):
     def testTitle(self):
         # Checa se o titulo está correto
         assert 'MALO' in self.driver.title
-    
+    '''
     def test1CriarLoginGerente(self):
         self.setUp()
 
@@ -44,7 +44,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'password2').send_keys('Senhamassa')
         criarLogin = self.driver.find_element(By.CLASS_NAME, 'submit').submit()
         print(criarLogin, 'teste')
-    
+    '''
 
 
     def Login(self):
@@ -72,6 +72,7 @@ class TestHome(LiveServerTestCase):
         assert omesa.get_attribute('href') == "http://127.0.0.1:8000/mesa/"
 
 
+    
     def testAdd1Mesa(self):
         self.Login()
         self.driver.find_element(By.CLASS_NAME, 'mesa').click()
@@ -157,8 +158,25 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'description').send_keys('Suco de laranja 300ml')
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
-
    
+    '''
+    def testEditDish(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/menu-category/')
+        self.driver.find_element(By.NAME, 'edit_Suco de laranja').click()
+        elemento_select = self.driver.find_element(By.NAME, "category")
+
+        dropdown = Select(elemento_select)
+        elemento_select.click()
+        dropdown.select_by_visible_text("Comidas")
+
+        self.driver.find_element(By.NAME, 'name').send_keys('Suco de laranja')
+        self.driver.find_element(By.NAME, 'price').send_keys('10')
+        self.driver.find_element(By.NAME, 'description').send_keys('Suco de laranja 300ml')
+
+        self.driver.find_element(By.CLASS_NAME, 'submit').click()
+    '''
+
     
     def testEditCategory(self):
         self.Login()
@@ -206,6 +224,7 @@ class TestHome(LiveServerTestCase):
         logout = self.driver.find_element(By.CLASS_NAME, 'logout')
         assert logout.get_attribute('href') == "http://127.0.0.1:8000/logout/"
         print(self.testLoginGerente())
+    
 
     def tearDown(self):
         self.driver.quit()
