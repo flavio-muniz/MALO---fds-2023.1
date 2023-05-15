@@ -256,7 +256,46 @@ class TestHome(LiveServerTestCase):
         logout = self.driver.find_element(By.CLASS_NAME, 'logout')
         assert logout.get_attribute('href') == "http://127.0.0.1:8000/logout/"
         print(self.testLoginGerente())
-    
+
+    def testSetGarcom(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/home/')
+        self.driver.find_element(By.CLASS_NAME, 'garcom_list').click()
+        self.driver.find_element(By.CLASS_NAME, 'add-garcom').click()
+        self.driver.find_element(By.NAME, 'nome').send_keys('Garcom')
+
+        elemento_select = self.driver.find_element(By.NAME, "cargo")
+        dropdown = Select(elemento_select)
+        elemento_select.click()
+        dropdown.select_by_visible_text("garçom")
+
+        self.driver.find_element(By.NAME, 'salario').send_keys('1800')
+
+        elemento_select = self.driver.find_element(By.NAME, "login")
+        dropdown = Select(elemento_select)
+        elemento_select.click()
+        dropdown.select_by_visible_text("Garcom1")
+        
+        self.driver.find_element(By.CLASS_NAME, 'enviar-funcionario').click()
+        
+
+    def LoginGarcom(self):
+        self.setUp()
+
+        self.driver.find_element(By.NAME, 'username').send_keys('Garcom1')
+        self.driver.find_element(By.NAME, 'password').send_keys('Senhamassa')
+        self.driver.find_element(By.CLASS_NAME, 'login').click()
+
+    def testLoginGerente(self):
+        self.LoginGarcom()
+
+        curl = self.driver.current_url
+        print(curl)
+        if '/home-garcom/' in curl:
+            return 'Garcom logged in'
+        else:
+            return 'Garcom not logged in'
+
 
     def tearDown(self):
         self.driver.quit()
