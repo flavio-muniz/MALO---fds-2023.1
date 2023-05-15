@@ -32,13 +32,13 @@
                             <div class="card-header">
                                 <tr>
                                     <td align="left">
-                                        <a href="{% url 'edit_category' category.id %}"  class="btn btn-xl "><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/pencil-square.svg" alt="lapis"></a>
+                                        <a href="{% url 'edit_category' category.id %}"  class="edit_{{ category }} btn btn-xl "><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/pencil-square.svg" alt="lapis"></a>
                                     </td>
                                     <td align="center">
                                         {{ category }}
                                     </td>
                                     <td align="right">
-                                        <a href="{% url 'delete_category' category.id %}" class="btn btn-xl"><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/trash.svg" alt="excluir"></a>
+                                        <a href="{% url 'delete_category' category.id %}" name="rem_{{ category }}" class="btn btn-xl"><img src="https://raw.githubusercontent.com/flavio-muniz/MALO---fds-2023.1/main/Malo/media/trash.svg" alt="excluir"></a>
                                     </td>
                                 </tr>
                             </div>
