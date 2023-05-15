@@ -56,7 +56,7 @@ Protótipo em vídeo:
 
 ## Testes de Sistema (E2E) Automatizados em Selenium[incompleto]
 
-<a href="novo_link"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
+<a href="https://novo_link"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
 ## Roteiro e instruções de acesso
 Como criar conta no Malo:
