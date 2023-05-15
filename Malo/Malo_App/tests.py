@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 
 
-
 # Create your tests here.
 class TestHome(LiveServerTestCase):
  
@@ -18,10 +17,9 @@ class TestHome(LiveServerTestCase):
     def testTitle(self):
         # Checa se o titulo está correto
         assert 'MALO' in self.driver.title
-    '''
+    
     def test1CriarLoginGerente(self):
         self.setUp()
-
 
         self.driver.find_element(By.CLASS_NAME, 'signup').click()
         
@@ -44,8 +42,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'password2').send_keys('Senhamassa')
         criarLogin = self.driver.find_element(By.CLASS_NAME, 'submit').submit()
         print(criarLogin, 'teste')
-    '''
-
+    
 
     def Login(self):
         self.setUp()
@@ -53,7 +50,6 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'username').send_keys('Gerente')
         self.driver.find_element(By.NAME, 'password').send_keys('Senhamassa')
         self.driver.find_element(By.CLASS_NAME, 'login').click()
-
 
 
     def testLoginGerente(self):
@@ -70,7 +66,6 @@ class TestHome(LiveServerTestCase):
         self.Login()
         omesa = self.driver.find_element(By.CLASS_NAME, 'mesa')
         assert omesa.get_attribute('href') == "http://127.0.0.1:8000/mesa/"
-
 
     
     def testAdd1Mesa(self):
@@ -121,6 +116,16 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'add_category').click()
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Categoria para remover')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
+
+    def testEditCategory1(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/home/')
+        self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
+        self.driver.find_element(By.CLASS_NAME, 'edit_Bebidass').click()
+        self.driver.find_element(By.CLASS_NAME, 'categoria').clear()
+        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas')
+
+        self.driver.find_element(By.CLASS_NAME, 'submit').click()
   
         
     def testRemCategoryTemp(self):
@@ -159,7 +164,8 @@ class TestHome(LiveServerTestCase):
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
    
-    '''
+
+    # LEMBRETE, limpar as entradas do form e passar os novos valores para editar o prato
     def testEditDish(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/menu-category/')
@@ -175,19 +181,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'description').send_keys('Suco de laranja 300ml')
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
-    '''
-
     
-    def testEditCategory(self):
-        self.Login()
-        self.driver.get('http://127.0.0.1:8000/home/')
-        self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
-        self.driver.find_element(By.CLASS_NAME, 'edit_Bebidass').click()
-        self.driver.find_element(By.CLASS_NAME, 'categoria').clear()
-        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas')
-
-        self.driver.find_element(By.CLASS_NAME, 'submit').click()
-
 
     def testOpenMenu(self):
         self.Login()
