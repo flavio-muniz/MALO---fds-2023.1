@@ -4,6 +4,7 @@ from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+import time
 
 
 # Create your tests here.
@@ -13,7 +14,7 @@ class TestHome(LiveServerTestCase):
         self.driver = webdriver.Chrome()
         self.driver.get('http://127.0.0.1:8000/')
 
-
+    
     def testTitle(self):
         # Checa se o titulo está correto
         assert 'MALO' in self.driver.title
@@ -30,7 +31,7 @@ class TestHome(LiveServerTestCase):
         criarLogin = self.driver.find_element(By.CLASS_NAME, 'submit').submit()
         print(criarLogin, 'teste')
 
-
+    
     def test2CriarLoginGarcom1(self):
         self.setUp()
 
@@ -42,7 +43,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'password2').send_keys('Senhamassa')
         criarLogin = self.driver.find_element(By.CLASS_NAME, 'submit').submit()
         print(criarLogin, 'teste')
-    
+   
 
     def Login(self):
         self.setUp()
@@ -61,7 +62,7 @@ class TestHome(LiveServerTestCase):
             return 'User logged in'
         else:
             return 'User not logged in'
-        
+       
     def testOpenMesa(self):
         self.Login()
         omesa = self.driver.find_element(By.CLASS_NAME, 'mesa')
@@ -100,7 +101,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidass')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
-
+    
     def testAddCategory2(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
@@ -221,7 +222,7 @@ class TestHome(LiveServerTestCase):
 
         ingredient_list = self.driver.find_element(By.CLASS_NAME, 'ingredient_list')
         assert ingredient_list.get_attribute('href') == "http://127.0.0.1:8000/ingredient-list/"
-
+      
     def testAddIgredient(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/add-ingredientes/')
@@ -230,8 +231,9 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'quantity').send_keys('5')
         self.driver.find_element(By.NAME, 'measure_unit').send_keys('Unidades')
         self.driver.find_element(By.NAME, 'price').send_keys('5')
-        self.driver.find_element(By.NAME, 'obs').send_keys('')
-        
+        self.driver.find_element(By.NAME, 'obs').send_keys('Laranjas para suco e refrigerante(em rodelas)')
+        time.sleep(10)
+        self.driver.find_element(By.CLASS_NAME, 'submit').submit()
 
 
 
