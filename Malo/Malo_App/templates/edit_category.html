@@ -19,7 +19,7 @@
                             {{ form.as_p }}
                             {% for dish in dishes %}
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="dishes" value="{{ dish.id }}" id="dish_{{ dish.id }}" 
+                                    <input class="form-check-input" type="checkbox" name="dishes" value="{{ dish.id }}" id="dish_{{ dish }}" 
                                     {% if dish in selected_dishes %}
                                     checked
                                     {% endif %}>

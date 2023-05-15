@@ -92,7 +92,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.ID, 'rem_qtd_mesas').send_keys('2')
         self.driver.find_element(By.CLASS_NAME, 'submit_rem_mesas').click()
 
-    def testAddCategory1(self):
+    def test3AddCategory1(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -117,7 +117,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Categoria para remover')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
-    def testEditCategory1(self):
+    def test3EditCategory(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -134,7 +134,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
         self.driver.find_element(By.NAME, 'rem_Categoria para remover').click()
 
-    def testAddDish1(self):
+    def testAddDish(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/add-dishes/')
         elemento_select = self.driver.find_element(By.NAME, "category")
@@ -149,7 +149,7 @@ class TestHome(LiveServerTestCase):
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
 
-    def testAddDish2(self):
+    def testAddDish1(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/add-dishes/')
         elemento_select = self.driver.find_element(By.NAME, "category")
@@ -164,8 +164,23 @@ class TestHome(LiveServerTestCase):
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
    
+    def testAddDish2(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/add-dishes/')
+        elemento_select = self.driver.find_element(By.NAME, "category")
 
-    # LEMBRETE, limpar as entradas do form e passar os novos valores para editar o prato
+        dropdown = Select(elemento_select)
+        elemento_select.click()
+        dropdown.select_by_visible_text("Bebidas")
+
+        self.driver.find_element(By.NAME, 'name').send_keys('Arroz com ovo')
+        self.driver.find_element(By.NAME, 'price').send_keys('22')
+        self.driver.find_element(By.NAME, 'description').send_keys('Prato individual de arroz com ovo, acompanha farofa.')
+
+        self.driver.find_element(By.CLASS_NAME, 'submit').click()
+   
+
+    # testa a edição do prato. nesse caso ele irá alterar o valor do produto e sua cetegoria
     def testEditDish(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/menu-category/')
@@ -174,14 +189,24 @@ class TestHome(LiveServerTestCase):
 
         dropdown = Select(elemento_select)
         elemento_select.click()
-        dropdown.select_by_visible_text("Comidas")
+        dropdown.select_by_visible_text("Bebidas")
 
-        self.driver.find_element(By.NAME, 'name').send_keys('Suco de laranja')
-        self.driver.find_element(By.NAME, 'price').send_keys('10')
-        self.driver.find_element(By.NAME, 'description').send_keys('Suco de laranja 300ml')
+        self.driver.find_element(By.NAME, 'price').clear()
+        self.driver.find_element(By.NAME, 'price').send_keys('12')
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
     
+    def testEditCategoryDish(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/menu-category/') 
+        self.driver.find_element(By.CLASS_NAME, 'edit_Bebidas').click()
+        self.driver.find_element(By.ID, 'dish_Arroz com ovo').click()
+        self.driver.find_element(By.CLASS_NAME, 'submit').click()
+        self.driver.find_element(By.CLASS_NAME, 'edit_Comidas').click()
+        self.driver.find_element(By.ID, 'dish_Arroz com ovo').click()
+        self.driver.find_element(By.CLASS_NAME, 'submit').click()
+                    
+
 
     def testOpenMenu(self):
         self.Login()
@@ -196,6 +221,19 @@ class TestHome(LiveServerTestCase):
 
         ingredient_list = self.driver.find_element(By.CLASS_NAME, 'ingredient_list')
         assert ingredient_list.get_attribute('href') == "http://127.0.0.1:8000/ingredient-list/"
+
+    def testAddIgredient(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/add-ingredientes/')
+        self.driver.find_element(By.NAME, 'name').send_keys('Laranja')
+        self.driver.find_element(By.NAME, 'exp_date').send_keys('18/05/2023')
+        self.driver.find_element(By.NAME, 'quantity').send_keys('5')
+        self.driver.find_element(By.NAME, 'measure_unit').send_keys('Unidades')
+        self.driver.find_element(By.NAME, 'price').send_keys('5')
+        self.driver.find_element(By.NAME, 'obs').send_keys('')
+        
+
+
 
     def testOpenMenuList(self):
         self.Login()
