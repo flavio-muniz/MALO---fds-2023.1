@@ -35,7 +35,7 @@ class TestHome(LiveServerTestCase):
     def test2CriarLoginGarcom1(self):
         self.setUp()
 
-    #     self.driver.find_element(By.CLASS_NAME, 'signup').click()
+        self.driver.find_element(By.CLASS_NAME, 'signup').click()
         
         self.driver.find_element(By.CLASS_NAME, 'username').send_keys('Garcom1')
         self.driver.find_element(By.CLASS_NAME, 'email').send_keys('garcom1@malo.com')
@@ -232,9 +232,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'measure_unit').send_keys('Unidades')
         self.driver.find_element(By.NAME, 'price').send_keys('5')
         self.driver.find_element(By.NAME, 'obs').send_keys('Laranjas para suco e refrigerante(em rodelas)')
-        time.sleep(10)
         self.driver.find_element(By.CLASS_NAME, 'submit').submit()
-
 
 
 
@@ -323,8 +321,4 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'close-order').click()
 
     def tearDown(self):
-        self.driver.quit()
-
-    
-
-
+        self.driver.quit() 
