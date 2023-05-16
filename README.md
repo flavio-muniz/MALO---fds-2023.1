@@ -61,6 +61,7 @@ Versão 1.0:
 <a href="https://www.youtube.com/watch?v=BFxs3OZi9Vg"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
 Versão 2.0: 
+
 <a href="https://www.youtube.com/watch?v=UDpq9A9lg6w"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
 ## Testes de Sistema (E2E) Automatizados em Selenium
