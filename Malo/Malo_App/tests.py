@@ -19,19 +19,7 @@ class TestHome(LiveServerTestCase):
         # Checa se o titulo está correto
         assert 'MALO' in self.driver.title
     
-    def test1CriarLoginGerente(self):
-        self.setUp()
-
-        self.driver.find_element(By.CLASS_NAME, 'signup').click()
-        
-        self.driver.find_element(By.CLASS_NAME, 'username').send_keys('Gerente')
-        self.driver.find_element(By.CLASS_NAME, 'email').send_keys('gerente@malo.com')
-        self.driver.find_element(By.CLASS_NAME, 'password1').send_keys('Senhamassa')
-        self.driver.find_element(By.CLASS_NAME, 'password2').send_keys('Senhamassa')
-        criarLogin = self.driver.find_element(By.CLASS_NAME, 'submit').submit()
-        print(criarLogin, 'teste')
-
-    
+      
     def test2CriarLoginGarcom1(self):
         self.setUp()
 
@@ -98,7 +86,7 @@ class TestHome(LiveServerTestCase):
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
         self.driver.find_element(By.CLASS_NAME, 'add_category').click()
-        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidass')
+        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
     
@@ -110,21 +98,13 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Comidas')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
-    def testAddCategoryTemp(self):
-        self.Login()
-        self.driver.get('http://127.0.0.1:8000/home/')
-        self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
-        self.driver.find_element(By.CLASS_NAME, 'add_category').click()
-        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Categoria para remover')
-        self.driver.find_element(By.CLASS_NAME, 'enviar').click()
-
     def test3EditCategory(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
-        self.driver.find_element(By.CLASS_NAME, 'edit_Bebidass').click()
+        self.driver.find_element(By.CLASS_NAME, 'edit_Sobremesas').click()
         self.driver.find_element(By.CLASS_NAME, 'categoria').clear()
-        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas')
+        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas Lacteas')
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
   
@@ -133,7 +113,7 @@ class TestHome(LiveServerTestCase):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
-        self.driver.find_element(By.NAME, 'rem_Categoria para remover').click()
+        self.driver.find_element(By.NAME, 'rem_Petiscos').click()
 
     def testAddDish(self):
         self.Login()
@@ -142,50 +122,20 @@ class TestHome(LiveServerTestCase):
 
         dropdown = Select(elemento_select)
         elemento_select.click()
-        dropdown.select_by_visible_text("Bebidas")
+        dropdown.select_by_visible_text("Almoços")
 
-        self.driver.find_element(By.NAME, 'name').send_keys('Coca-Cola')
-        self.driver.find_element(By.NAME, 'price').send_keys('8')
-        self.driver.find_element(By.NAME, 'description').send_keys('Coca-Cola ks')
-
-        self.driver.find_element(By.CLASS_NAME, 'submit').click()
-
-    def testAddDish1(self):
-        self.Login()
-        self.driver.get('http://127.0.0.1:8000/add-dishes/')
-        elemento_select = self.driver.find_element(By.NAME, "category")
-
-        dropdown = Select(elemento_select)
-        elemento_select.click()
-        dropdown.select_by_visible_text("Comidas")
-
-        self.driver.find_element(By.NAME, 'name').send_keys('Suco de laranja')
-        self.driver.find_element(By.NAME, 'price').send_keys('10')
-        self.driver.find_element(By.NAME, 'description').send_keys('Suco de laranja 300ml')
+        self.driver.find_element(By.NAME, 'name').send_keys('Feijoada')
+        self.driver.find_element(By.NAME, 'price').send_keys('48')
+        self.driver.find_element(By.NAME, 'description').send_keys('Serve até 5 pessoas')
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
-   
-    def testAddDish2(self):
-        self.Login()
-        self.driver.get('http://127.0.0.1:8000/add-dishes/')
-        elemento_select = self.driver.find_element(By.NAME, "category")
-
-        dropdown = Select(elemento_select)
-        elemento_select.click()
-        dropdown.select_by_visible_text("Bebidas")
-
-        self.driver.find_element(By.NAME, 'name').send_keys('Arroz com ovo')
-        self.driver.find_element(By.NAME, 'price').send_keys('22')
-        self.driver.find_element(By.NAME, 'description').send_keys('Prato individual de arroz com ovo, acompanha farofa.')
-
-        self.driver.find_element(By.CLASS_NAME, 'submit').click()
-   
+  
 
     # testa a edição do prato. nesse caso ele irá alterar o valor do produto e sua cetegoria
     def testEditDish(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/menu-category/')
-        self.driver.find_element(By.NAME, 'edit_Suco de laranja').click()
+        self.driver.find_element(By.NAME, 'edit_Suco de Laranja').click()
         elemento_select = self.driver.find_element(By.NAME, "category")
 
         dropdown = Select(elemento_select)
@@ -203,7 +153,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'edit_Bebidas').click()
         self.driver.find_element(By.ID, 'dish_Arroz com ovo').click()
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
-        self.driver.find_element(By.CLASS_NAME, 'edit_Comidas').click()
+        self.driver.find_element(By.CLASS_NAME, 'edit_Almoços').click()
         self.driver.find_element(By.ID, 'dish_Arroz com ovo').click()
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
                     
@@ -263,7 +213,7 @@ class TestHome(LiveServerTestCase):
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'garcom_list').click()
         self.driver.find_element(By.CLASS_NAME, 'add-garcom').click()
-        self.driver.find_element(By.NAME, 'nome').send_keys('Garcom')
+        self.driver.find_element(By.NAME, 'nome').send_keys('Marcelo')
 
         elemento_select = self.driver.find_element(By.NAME, "cargo")
         dropdown = Select(elemento_select)
@@ -275,7 +225,7 @@ class TestHome(LiveServerTestCase):
         elemento_select = self.driver.find_element(By.NAME, "login")
         dropdown = Select(elemento_select)
         elemento_select.click()
-        dropdown.select_by_visible_text("Garcom1")
+        dropdown.select_by_visible_text("Marcelo")
         
         self.driver.find_element(By.CLASS_NAME, 'enviar-funcionario').click()
         
@@ -283,33 +233,33 @@ class TestHome(LiveServerTestCase):
     def LoginGarcom(self):
         self.setUp()
 
-        self.driver.find_element(By.NAME, 'username').send_keys('Garcom1')
+        self.driver.find_element(By.NAME, 'username').send_keys('Jorge')
         self.driver.find_element(By.NAME, 'password').send_keys('Senhamassa')
         self.driver.find_element(By.CLASS_NAME, 'login').click()
 
-    def testLoginGerente(self):
+    def testLoginGarcom(self):
         self.LoginGarcom()
 
         curl = self.driver.current_url
         print(curl)
         if '/home-garcom/' in curl:
-            return 'Garcom logged in'
+            return 'Jorge logged in'
         else:
-            return 'Garcom not logged in'
+            return 'Jorge not logged in'
 
     def testGarcomCreateOrder(self):
         self.LoginGarcom()
-        self.driver.find_element(By.NAME, 'Mesa 2').click()
+        self.driver.find_element(By.NAME, 'Mesa 1').click()
         self.driver.find_element(By.CLASS_NAME, 'Fazer-pedido').click()
 
         elemento_select = self.driver.find_element(By.NAME, "dish")
         dropdown = Select(elemento_select)
         elemento_select.click()
-        dropdown.select_by_visible_text("Coca-Cola")
+        dropdown.select_by_visible_text("Sorvete de Baunilha")
 
         self.driver.find_element(By.NAME, 'quantity').clear()
         self.driver.find_element(By.NAME, 'quantity').send_keys('2')
-        self.driver.find_element(By.NAME, 'obs').send_keys('Geladas') 
+        self.driver.find_element(By.NAME, 'obs').send_keys('Após almoço') 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
 
     def testGarcomConfirmOrder(self):
