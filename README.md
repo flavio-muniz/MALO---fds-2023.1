@@ -56,11 +56,15 @@ Protótipo em vídeo 2.0:
 
 ## Site Navegável em vídeo:
 
+Versão 1.0:
+
 <a href="https://www.youtube.com/watch?v=BFxs3OZi9Vg"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
-## Testes de Sistema (E2E) Automatizados em Selenium[incompleto]
+Versão 2.0:
 
-<a href="https://novo_link"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
+## Testes de Sistema (E2E) Automatizados em Selenium
+
+<a href="https://www.youtube.com/watch?v=IUuyq8_KMqo"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
 ## Roteiro e instruções de acesso
 Como criar conta no Malo:
