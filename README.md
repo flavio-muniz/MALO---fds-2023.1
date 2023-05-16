@@ -69,6 +69,11 @@ Versão 2.0:
 <a href="https://www.youtube.com/watch?v=IUuyq8_KMqo"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
 ## Roteiro e instruções de acesso
+
+Como fazer login como Gerente:
+
+<a href="https://scribehow.com/shared/Como_fazer_login_como_gerente__TX0gPwz3QHy2d3LkMLU7rQ"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
+
 Como criar conta no Malo:
 
 <a href="https://scribehow.com/shared/Como_criar_conta_no_Malo__-uURkMjITKeOpwgDQV3deg"><img src="https://assets-global.website-files.com/615f415173b71a5211e28de7/615f6a53ee1b7359810a43e6_scribe-logo.svg" alt="Scribe" style="width:60px;height:60px;"></a>
