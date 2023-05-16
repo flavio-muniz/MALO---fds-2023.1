@@ -124,9 +124,9 @@ class TestHome(LiveServerTestCase):
         elemento_select.click()
         dropdown.select_by_visible_text("Almoços")
 
-        self.driver.find_element(By.NAME, 'name').send_keys('Feijoada')
-        self.driver.find_element(By.NAME, 'price').send_keys('48')
-        self.driver.find_element(By.NAME, 'description').send_keys('Serve até 5 pessoas')
+        self.driver.find_element(By.NAME, 'name').send_keys('Macarronada')
+        self.driver.find_element(By.NAME, 'price').send_keys('60')
+        self.driver.find_element(By.NAME, 'description').send_keys('Serve até 4 pessoas')
 
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
   
