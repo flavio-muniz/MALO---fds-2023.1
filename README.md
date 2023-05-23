@@ -34,7 +34,7 @@ Ponto de vista do garçom:
 
 Ponto de vista do gerente:
 
-<a href="https://drive.google.com/file/d/1ibmwzMAns88IQ_cwdzjd6QkLwYFPsMJg/view?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Diagrams.net_Logo.svg/2048px-Diagrams.net_Logo.svg.png" alt="Diagrams" style="width:60px;height:60px;"></a>
+<a href="https://drive.google.com/file/d/1hXups0WaoG15NdDmVUj3QNpA_3tTKq1e/view?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Diagrams.net_Logo.svg/2048px-Diagrams.net_Logo.svg.png" alt="Diagrams" style="width:60px;height:60px;"></a>
 
 ## Protótipo navegável
 
