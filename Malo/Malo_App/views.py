@@ -441,30 +441,13 @@ def add_garcom(request):
     else:
         form = AddGarcomForm()
     return render(request, 'add_garcom.html', {'form': form})
-# def add_garcom(request):
-#     if request.method == 'POST':
-#         form = AddGarcomForm(request.POST)
-#         if form.is_valid():
-#             garcom = form.save()
-#             return redirect('garcom_list')
-#     else:
-#         form = AddGarcomForm()
-#     return render(request, 'add_garcom.html', {'form': form})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def edit_garcom(request):
+def garcom_list(request):
     garcoms = Garcom.objects.all()
-    if request.method == 'POST':
-        form = AddGarcomForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Funcionário adicionado com sucesso!")
-            return redirect('edit_garcom')
-    else:
-        form = AddGarcomForm()
     
-    return render(request, 'edit_garcom.html', {'garcoms': garcoms, 'form': form})
+    return render(request, 'garcom_list.html', {'garcoms': garcoms})
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
