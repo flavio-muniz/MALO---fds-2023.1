@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Faturamento mensal </h1>
+<h1>Lucro </h1>
+<br/>
+<h5>(+)Faturamento: R$ {{ invoice.billing|floatformat:2 }}</h5>
+<h5>(-)Serviços: R$ {{ invoice.tips|floatformat:2 }}</h5>
+<h5>(-)Salários Funcionarios: R$ {{ invoice.exp_employees|floatformat:2 }}</h5>
+<h5>(-)Insumos: R$ {{ invoice.feedstock|floatformat:2 }}</h5>
+
+
+{% endblock %}

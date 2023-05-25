@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404, reverse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, OrderDish, Garcom
+from .models import Ingredient, Dish, Category, Mesa, DishIngredient, Order, OrderDish, Garcom, Invoice
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory, inlineformset_factory
@@ -56,6 +56,7 @@ def SignupPage(request):
                 try:
                     Group.objects.get(name='admin')
                 except:
+                    Invoice.objects.get_or_create(name='main')
                     Group.objects.get_or_create(name='garçom')
                     Group.objects.get_or_create(name='admin')
                     group = Group.objects.get(name='admin')
@@ -383,31 +384,38 @@ def Close_orders(request, mesa_numero):
     dishes =  Dish.objects.all()
     mesa = get_object_or_404(Mesa, numero=mesa_numero)
     orders = Order.objects.filter(mesa=mesa)
+    invoice = Invoice.objects.get(name='main')
+
+    subtotal = 0
+
+    for order in orders:
+        order_dishes = OrderDish.objects.filter(order=order)
+        total_price_local = 0
+
+        for order_dish in order_dishes:
+            dish_price = order_dish.dish.price
+            quantity = order_dish.quantity
+            total_price_local += dish_price * quantity
+        
+        subtotal += total_price_local
+        services = subtotal * 0.1
+        total = subtotal + services
+
+        order.total_price_local = total_price_local
 
     if request.method == 'POST':
+        invoice.tips += services
+        invoice.billing += total
+        invoice.save()
         orders.delete()
         subtotal = 0
 
         messages.success(request, "Pedido fechado com sucesso!")
         return redirect('home')
 
-    else:
-        subtotal = 0
-
-        for order in orders:
-            order_dishes = OrderDish.objects.filter(order=order)
-            total_price_local = 0
-
-            for order_dish in order_dishes:
-                dish_price = order_dish.dish.price
-                quantity = order_dish.quantity
-                total_price_local += dish_price * quantity
+  
+        
             
-            subtotal += total_price_local
-            services = subtotal * 0.1
-            total = subtotal + services
-
-            order.total_price_local = total_price_local
 
     if not orders:
         return render(request, 'close_orders.html', {'mesa': mesa})
@@ -463,3 +471,21 @@ def edit_garcom_detail(request, garcom_id):
         form = AddGarcomForm(instance=garcom)
 
     return render(request, 'edit_garcom_detail.html', {'form': form, 'garcom': garcom})
+
+def invoice_view(request):
+    invoice = Invoice.objects.get(name='main')
+    employees = Garcom.objects.all()
+    salary = 0
+
+    for garcom in employees:
+        salary += garcom.salario
+    
+    invoice.exp_employees = salary
+    invoice.save()
+
+
+    return render(request, 'invoice.html',{
+        'invoice':invoice,
+    })
+
+
