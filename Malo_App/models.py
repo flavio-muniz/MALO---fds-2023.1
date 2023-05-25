@@ -103,3 +103,9 @@ class OrderDish(models.Model):
 
     def __str__(self):
         return str(self.dish)
+
+class Invoice(models.Model):
+    exp_employers = models.FloatField('Despesas funcionarios')
+    tips = models.FloatField('servico')
+    billing = models.FloatField('faturamento')
+    feedstock = models.FloatField('insumos')
