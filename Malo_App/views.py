@@ -56,7 +56,13 @@ def SignupPage(request):
                 try:
                     Group.objects.get(name='admin')
                 except:
-                    Invoice.objects.get_or_create(name='main')
+                    invoice = Invoice.objects.get_or_create(name='main')
+                    invoice.exp_employees = 0
+                    invoice.tips = 0
+                    invoice.billing = 0
+                    invoice.feedstock = 0
+                    invoice.save()
+
                     Group.objects.get_or_create(name='garçom')
                     Group.objects.get_or_create(name='admin')
                     group = Group.objects.get(name='admin')
@@ -475,17 +481,26 @@ def edit_garcom_detail(request, garcom_id):
 def invoice_view(request):
     invoice = Invoice.objects.get(name='main')
     employees = Garcom.objects.all()
+    ingredients = Ingredient.objects.all()
     salary = 0
+    feedstock = 0
 
     for garcom in employees:
         salary += garcom.salario
+
+    for ingredient in ingredients:
+        feedstock += ingredient.price
     
     invoice.exp_employees = salary
+    invoice.feedstock = feedstock
     invoice.save()
+
+    lucro = invoice.billing - invoice.exp_employees - invoice.tips - invoice.feedstock
 
 
     return render(request, 'invoice.html',{
         'invoice':invoice,
+        'lucro': lucro,
     })
 
 

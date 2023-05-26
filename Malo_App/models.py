@@ -48,7 +48,7 @@ class Dish(models.Model):
 class DishIngredient(models.Model):
     dish = models.ForeignKey(Dish, on_delete=models.CASCADE)
     '''Prato que ele participa'''
-    name = models.CharField('Ingrediente', max_length=120) 
+    name = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
     '''nome do ingrediente'''
     quantity = models.FloatField('Quantidade')
     '''quantidade que consta no estoque do ingrediente'''
@@ -85,15 +85,6 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Pedido {self.numero}'
-
-class Garcom(models.Model):
-    nome = models.CharField('Nome', max_length=120)
-    cargo = models.CharField('Cargo', max_length=120)
-    salario = models.DecimalField('Salário', max_digits=8, decimal_places=2)
-    login = models.CharField('Login', max_length=120)
-
-    def __str__(self):
-        return self.nome
     
 class OrderDish(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -104,6 +95,14 @@ class OrderDish(models.Model):
     def __str__(self):
         return str(self.dish)
 
+class Garcom(models.Model):
+    nome = models.CharField('Nome', max_length=120)
+    cargo = models.CharField('Cargo', max_length=120)
+    salario = models.FloatField('Salário')
+    login = models.CharField('Login', max_length=120)
+
+    def __str__(self):
+        return self.nome
 
 class Invoice(models.Model):
     name = models.CharField('nome',max_length=5)

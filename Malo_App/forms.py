@@ -32,13 +32,13 @@ class DishIngredientForm(ModelForm):
         fields = ('name','quantity','measure_unit')
 
         labels = {
-            'name':'Nome:',
+            'name':'Ingrediente:',
             'quantity':'Quantidade',
             'measure_unit':'Unidade de medida( Ex.: kg,gramas,litros,ml,unidades,etc)',
         }
 
         widgets = {
-            'name': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Nome'}),
+            'name': forms.Select(attrs={'class': 'form-control', 'placeholder': 'Ingrediente'}),
             'quantity': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Quantidade'}),
             'measure_unit': forms.TextInput(attrs={'class':'form-control', 'placeholder':'Unidade de medida'}),
         }
