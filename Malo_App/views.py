@@ -46,7 +46,7 @@ def SignupPage(request):
             if User.objects.filter(username=uname).exists():
                 messages.success(request, ('Já existe uma conta com esse nome de usuário. Por favor, escolha outro.'))
                 return redirect('signup')
-            if User.objects.filter(email=email).exists():
+            elif User.objects.filter(email=email).exists():
                 messages.success(request, ('Já existe uma conta com esse email. Por favor, escolha outro.'))
                 return redirect('signup')   
             else:
@@ -56,12 +56,8 @@ def SignupPage(request):
                 try:
                     Group.objects.get(name='admin')
                 except:
-                    invoice = Invoice.objects.get_or_create(name='main')
-                    invoice.exp_employees = 0
-                    invoice.tips = 0
-                    invoice.billing = 0
-                    invoice.feedstock = 0
-                    invoice.save()
+                    Invoice.objects.get_or_create(name='main',exp_employees = 0,tips = 0,billing = 0,feedstock = 0)
+                
 
                     Group.objects.get_or_create(name='garçom')
                     Group.objects.get_or_create(name='admin')
