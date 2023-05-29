@@ -33,6 +33,9 @@ urlpatterns = [
     path('garcom_list/', views.garcom_list, name='garcom_list'),
     path('edit_garcom/<int:garcom_id>/', views.edit_garcom_detail, name='edit_garcom_detail'),
     path('invoice/',views.invoice_view, name='invoice'),
+    path('delete_garcom/<int:garcom_id>', views.delete_garcom, name='delete_garcom'),
+    path('add_garcom/<int:garcom_id>/', views.add_garcom, name='add_garcom'),
+
 
 
 

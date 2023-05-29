@@ -7,6 +7,7 @@ from django.contrib.auth.models import User, Group
 from django.forms.models import modelformset_factory, inlineformset_factory
 from .forms import IngredientForm, DishForm, DishIngredientForm, Order, OrderDish, CategoryForm, AddGarcomForm, OrderForm
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from .decorators import unauth_user, allowed_users, admin_only
 # Create your views here.
 
@@ -433,23 +434,51 @@ def Close_orders(request, mesa_numero):
     })
 
 
+# @login_required(login_url='login')
+# @allowed_users(allowed_roles=['admin'])
+# def add_garcom(request):
+#     if request.method == 'POST':
+#         form = AddGarcomForm(request.POST)
+#         if form.is_valid():
+#             user = form.cleaned_data['login']
+#             group_name = form.cleaned_data['cargo']
+#             garcom = form.save(commit=False)
+#             garcom.user = user
+#             garcom.save()
+#             group = Group.objects.get(name=group_name)
+#             user.groups.add(group)
+#             messages.success(request, "Funcionário adicionado com sucesso!")
+#             return redirect('garcom_list')
+#     else:
+#         form = AddGarcomForm()
+#     return render(request, 'add_garcom.html', {'form': form})
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['admin'])
-def add_garcom(request):
+def add_garcom(request, garcom_id=None):
+    if garcom_id:
+        garcom = get_object_or_404(Garcom, id=garcom_id)
+    else:
+        garcom = None
+
     if request.method == 'POST':
-        form = AddGarcomForm(request.POST)
+        form = AddGarcomForm(request.POST, instance=garcom)
         if form.is_valid():
             user = form.cleaned_data['login']
             group_name = form.cleaned_data['cargo']
-            garcom = form.save(commit=False)
-            garcom.user = user
-            garcom.save()
+            updated_garcom = form.save(commit=False)
+            updated_garcom.user = user
+            updated_garcom.save()
+
+            # Remover usuário de todos os grupos e adicioná-lo ao novo grupo
+            user.groups.clear()
             group = Group.objects.get(name=group_name)
             user.groups.add(group)
-            messages.success(request, "Funcionário adicionado com sucesso!")
+
+            messages.success(request, "Funcionário adicionado com sucesso!" if not garcom_id else "Funcionário editado com sucesso!")
             return redirect('garcom_list')
     else:
-        form = AddGarcomForm()
+        form = AddGarcomForm(instance=garcom)
+        
     return render(request, 'add_garcom.html', {'form': form})
 
 @login_required(login_url='login')
@@ -468,7 +497,7 @@ def edit_garcom_detail(request, garcom_id):
         if form.is_valid():
             form.save()
             messages.success(request, "Funcionário editado com sucesso!")
-            return redirect('edit_garcom')
+            return redirect('garcom_list')
     else:
         form = AddGarcomForm(instance=garcom)
 
@@ -499,4 +528,16 @@ def invoice_view(request):
         'lucro': lucro,
     })
 
+
+@csrf_exempt
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def delete_garcom(request, garcom_id):
+    if request.method == 'DELETE':
+        garcom = get_object_or_404(Garcom, id=garcom_id)
+        user = User.objects.get(username=garcom.login)  # Encontre o usuário correspondente ao garçom
+        user.groups.clear()  # Remova o usuário de todos os grupos
+        garcom.delete()  # Após remover o usuário do grupo, exclua o garçom
+        messages.success(request, "Funcionário removido com sucesso!")
+    return HttpResponse(status=204)
 
