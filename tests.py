@@ -35,7 +35,7 @@ class cleo(TestCase):
         register.click()
         time.sleep(2)
         username_register = driver.find_element(By.CLASS_NAME,"username")
-        username_register.send_keys("Garcom1")
+        username_register.send_keys("Garcom5")
         email_register = driver.find_element(By.CLASS_NAME,"email")
         email_register.send_keys("garcom1@malo.com")
         password_register = driver.find_element(By.CLASS_NAME,"password1")
@@ -45,6 +45,7 @@ class cleo(TestCase):
         login = driver.find_element(By.CLASS_NAME, "submit")
         login.submit()
         driver.quit()
+        #qqq
     
     
     def run_tests(self, driver):
