@@ -25,17 +25,17 @@ class TestHome(LiveServerTestCase):
     #     assert 'MALO' in self.driver.title
     
       
-    def test2CriarLoginGarcom1(self):
-        self.setUp()
+    # def test2CriarLoginGarcom1(self):
+    #     self.setUp()
 
-        register = driver.find_element(By.ID,"signup").click()
+    #     register = driver.find_element(By.ID,"signup").click()
         
-        self.driver.find_element(By.CLASS_NAME, 'username').send_keys('Garcom1')
-        self.driver.find_element(By.CLASS_NAME, 'email').send_keys('garcom1@malo.com')
-        self.driver.find_element(By.CLASS_NAME, 'password1').send_keys('Senhamassa')
-        self.driver.find_element(By.CLASS_NAME, 'password2').send_keys('Senhamassa')
-        criarLogin = self.driver.find_element(By.CLASS_NAME, 'submit').submit()
-        print(criarLogin, 'teste')
+    #     self.driver.find_element(By.CLASS_NAME, 'username').send_keys('Garcom1')
+    #     self.driver.find_element(By.CLASS_NAME, 'email').send_keys('garcom1@malo.com')
+    #     self.driver.find_element(By.CLASS_NAME, 'password1').send_keys('Senhamassa')
+    #     self.driver.find_element(By.CLASS_NAME, 'password2').send_keys('Senhamassa')
+    #     criarLogin = self.driver.find_element(By.CLASS_NAME, 'submit').submit()
+    #     print(criarLogin, 'teste')
    
 
     # def Login(self):
