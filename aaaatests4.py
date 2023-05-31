@@ -29,6 +29,7 @@ class cleo(TestCase):
         confirm_register.send_keys("Senhamassa")
         login = driver.find_element(By.CLASS_NAME, "submit")
         login.submit()
+        driver.quit()
         
     def register_garcom1(self, driver):
         register = driver.find_element(By.ID,"signup")
