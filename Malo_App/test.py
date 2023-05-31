@@ -17,6 +17,7 @@ class TestHome(LiveServerTestCase):
  
     def setUp(self):
         self.driver.get('http://127.0.0.1:8000/')
+        self.run_tests(driver)
 
     
     # def testTitle(self):
