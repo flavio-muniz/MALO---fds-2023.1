@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "release" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "release" ]
 
 jobs:
   build:
@@ -32,7 +32,7 @@ jobs:
     - uses: nanasess/setup-chromedriver@v2
     - run: |
         chromedriver --url-base=/wd/hub &
-    - name: Run Tests
+    - name: Run local Server
       run: |
         python manage.py runserver &
         sleep 5
