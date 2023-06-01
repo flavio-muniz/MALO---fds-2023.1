@@ -21,8 +21,7 @@ class TestHome(LiveServerTestCase):
         self.driver.get('http://127.0.0.1:8000/')
 
     def test2CriarLoginGarcom1(self):
-        register = driver.find_element(By.ID,"signup")
-        register.click()
+        self.driver.find_element(By.ID,"signup").click()
         time.sleep(2)
         self.driver.find_element(By.CLASS_NAME, 'username').send_keys('Garcom1')
         self.driver.find_element(By.CLASS_NAME, 'email').send_keys('garcom1@malo.com')
