@@ -83,13 +83,13 @@ class TestHome(LiveServerTestCase):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         time.sleep(5)
-        self.driver.find_element(By.NAME, "menu_category").click()
+        self.driver.find_element(By.CLASS_NAME, "menu_category").click()
         self.driver.find_element(By.CLASS_NAME, 'add_category').click()
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
     
-    def testAddCategory2(self):
+    def testAddCategory2(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -97,7 +97,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Comidas')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
-    def test3EditCategory(self):
+    def test3EditCategory(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -108,13 +108,13 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
   
         
-    def testRemCategoryTemp(self):
+    def testRemCategoryTemp(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
         self.driver.find_element(By.NAME, 'rem_Petiscos').click()
 
-    def testAddDish(self):
+    def testAddDish(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/add-dishes/')
         elemento_select = self.driver.find_element(By.NAME, "category")
@@ -131,7 +131,7 @@ class TestHome(LiveServerTestCase):
   
 
     # testa a edição do prato. nesse caso ele irá alterar o valor do produto e sua cetegoria
-    def testEditDish(self):
+    def testEditDish(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/menu-category/')
         self.driver.find_element(By.NAME, 'edit_Suco de Laranja').click()
@@ -158,7 +158,7 @@ class TestHome(LiveServerTestCase):
                     
 
 
-    def testOpenMenu(self):
+    def testOpenMenu(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         menu = self.driver.find_element(By.CLASS_NAME, 'menu_category')
@@ -185,14 +185,14 @@ class TestHome(LiveServerTestCase):
 
 
 
-    def testOpenMenuList(self):
+    def testOpenMenuList(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
         menu = self.driver.find_element(By.CLASS_NAME, 'menu')
         assert menu.get_attribute('href') == "http://127.0.0.1:8000/menu/"
         
-    def testOpenAddCategory(self):
+    def testOpenAddCategory(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
