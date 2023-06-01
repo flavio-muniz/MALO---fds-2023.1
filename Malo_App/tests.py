@@ -36,6 +36,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'username').send_keys('Gerente')
         self.driver.find_element(By.NAME, 'password').send_keys('Senhamassa')
         self.driver.find_element(By.CLASS_NAME, 'login').click()
+        time.sleep(5)
 
 
     def testLoginGerente(self):
@@ -48,37 +49,37 @@ class TestHome(LiveServerTestCase):
         else:
             return 'User not logged in'
        
-    def testOpenMesa(self):
+    def testOpenMesa(self): #error
         self.Login()
         omesa = self.driver.find_element(By.CLASS_NAME, 'mesa')
         assert omesa.get_attribute('href') == "http://127.0.0.1:8000/mesa/"
 
     
-    def testAdd1Mesa(self):
+    def testAdd1Mesa(self): #error
         self.Login()
         self.driver.find_element(By.CLASS_NAME, 'mesa').click()
         self.driver.find_element(By.CLASS_NAME, 'add_mesa').click()
 
 
-    def testAddMultMesas(self):
+    def testAddMultMesas(self): #error
         self.Login()
         self.driver.find_element(By.CLASS_NAME, 'mesa').click()
         self.driver.find_element(By.ID, 'add_qtd_mesas').send_keys('4')
         self.driver.find_element(By.CLASS_NAME, 'submit_add_mesas').click()
 
-    def testRem1Mesa(self):
+    def testRem1Mesa(self): #error
         self.Login()
         self.driver.find_element(By.CLASS_NAME, 'mesa').click()
         self.driver.find_element(By.ID, 'rem_mesa').click()
 
 
-    def testRemMultMesas(self):
+    def testRemMultMesas(self): #error
         self.Login()
         self.driver.find_element(By.CLASS_NAME, 'mesa').click()
         self.driver.find_element(By.ID, 'rem_qtd_mesas').send_keys('2')
         self.driver.find_element(By.CLASS_NAME, 'submit_rem_mesas').click()
 
-    def test3AddCategory1(self):
+    def test3AddCategory1(self): #erro
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         time.sleep(5)
