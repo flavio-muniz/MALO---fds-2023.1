@@ -83,7 +83,7 @@ class TestHome(LiveServerTestCase):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         time.sleep(5)
-        self.driver.find_element(By.ID, "menu_category").click()
+        self.driver.find_element(By.NAME, "menu_category").click()
         self.driver.find_element(By.CLASS_NAME, 'add_category').click()
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
