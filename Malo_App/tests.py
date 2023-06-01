@@ -18,7 +18,7 @@ driver = webdriver.Chrome(options=chrome_options)
 class TestHome(LiveServerTestCase):
     
     def setUp(self):
-        driver.get('http://127.0.0.1:8000/')
+        self.driver.get('http://127.0.0.1:8000/')
 
     def test2CriarLoginGarcom1(self):
         register = driver.find_element(By.ID,"signup")
@@ -269,4 +269,4 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'close-order').click()
 
     def tearDown(self):
-        driver.quit() 
+        self.driver.quit() 
