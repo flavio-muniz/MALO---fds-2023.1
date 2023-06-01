@@ -10,7 +10,6 @@ chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
-driver = webdriver.Chrome(options=chrome_options)
 
 
 # Create your tests here.
@@ -18,6 +17,7 @@ driver = webdriver.Chrome(options=chrome_options)
 class TestHome(LiveServerTestCase):
     
     def setUp(self):
+        self.driver = webdriver.Chrome(options=chrome_options)
         self.driver.get('http://127.0.0.1:8000/')
 
     def test2CriarLoginGarcom1(self):
