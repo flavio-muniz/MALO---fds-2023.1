@@ -1,6 +1,9 @@
+from django import test
+from django.forms import Select
 from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 import time
 
 chrome_options = webdriver.ChromeOptions()
