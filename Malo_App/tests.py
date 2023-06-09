@@ -89,7 +89,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
     
-    def testAddCategory2(self): #error
+    def testAddCategory2(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -97,7 +97,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Comidas')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
-    def test3EditCategory(self): #error
+    def test3EditCategory(self): 
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -108,7 +108,7 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
   
         
-    def testRemCategoryTemp(self): #error
+    def testRemCategoryTemp(self):
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -158,7 +158,7 @@ class TestHome(LiveServerTestCase):
                     
 
 
-    def testOpenMenu(self): #error
+    def testOpenMenu(self): 
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         menu = self.driver.find_element(By.CLASS_NAME, 'menu_category')
@@ -183,16 +183,14 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'obs').send_keys('Laranjas para suco e refrigerante(em rodelas)')
         self.driver.find_element(By.CLASS_NAME, 'submit').submit()
 
-
-
-    def testOpenMenuList(self): #error
+    def testOpenMenuList(self): 
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
         menu = self.driver.find_element(By.CLASS_NAME, 'menu')
         assert menu.get_attribute('href') == "http://127.0.0.1:8000/menu/"
         
-    def testOpenAddCategory(self): #error
+    def testOpenAddCategory(self): 
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
@@ -263,11 +261,15 @@ class TestHome(LiveServerTestCase):
 
     def testGarcomConfirmOrder(self):
         self.LoginGarcom()
-        self.driver.find_element(By.NAME, 'Mesa 2').click()
-                
+        self.driver.find_element(By.NAME, 'Mesa 2').click()      
         self.driver.find_element(By.NAME, 'Fechar-conta').click()
-        
         self.driver.find_element(By.CLASS_NAME, 'close-order').click()
+
+    def testViewFat(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/home/')
+        invoice = self.driver.find_element(By.CLASS_NAME, 'invoice').click()
+        assert invoice.get_attribute('text') == '<h1>Faturamento<h1>'    
 
     def tearDown(self):
         self.driver.quit() 
