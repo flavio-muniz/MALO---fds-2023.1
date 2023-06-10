@@ -85,7 +85,7 @@ class TestHome(LiveServerTestCase):
         time.sleep(5)
         self.driver.find_element(By.CLASS_NAME, "menu_category").click()
         self.driver.find_element(By.CLASS_NAME, 'add_category').click()
-        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Bebidas')
+        self.driver.find_element(By.CLASS_NAME, 'categoria').send_keys('Jantar')
         self.driver.find_element(By.CLASS_NAME, 'enviar').click()
 
     
@@ -108,13 +108,13 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.CLASS_NAME, 'submit').click()
   
         
-    def testRemCategoryTemp(self):
+    def testRemCategoryTemp(self): 
         self.Login()
         self.driver.get('http://127.0.0.1:8000/home/')
         self.driver.find_element(By.CLASS_NAME, 'menu_category').click()
-        self.driver.find_element(By.NAME, 'rem_Petiscos').click()
-
-    def testAddDish(self): #error
+        self.driver.get('http://127.0.0.1:8000/delete-category/3')
+     
+    def testAddDish(self): 
         self.Login()
         self.driver.get('http://127.0.0.1:8000/add-dishes/')
         elemento_select = self.driver.find_element(By.NAME, "category")
@@ -125,12 +125,14 @@ class TestHome(LiveServerTestCase):
 
         self.driver.find_element(By.NAME, 'name').send_keys('Macarronada')
         self.driver.find_element(By.NAME, 'price').send_keys('60')
-        self.driver.find_element(By.NAME, 'description').send_keys('Serve até 4 pessoas')
-
-        self.driver.find_element(By.CLASS_NAME, 'submit').click()
+        self.driver.find_element(By.NAME, 'description').send_keys('Serve até 4 pessoas')       
+        submit_button = self.driver.find_element(By.CLASS_NAME, 'submit')
+        self.driver.execute_script("arguments[0].scrollIntoView();", submit_button)
+        time.sleep(2)
+        submit_button.click()
   
 
-    # testa a edição do prato. nesse caso ele irá alterar o valor do produto e sua cetegoria
+    
     def testEditDish(self): #error
         self.Login()
         self.driver.get('http://127.0.0.1:8000/menu-category/')
@@ -143,10 +145,12 @@ class TestHome(LiveServerTestCase):
 
         self.driver.find_element(By.NAME, 'price').clear()
         self.driver.find_element(By.NAME, 'price').send_keys('12')
-
-        self.driver.find_element(By.CLASS_NAME, 'submit').click()
+        submit_button = self.driver.find_element(By.CLASS_NAME, 'submit')
+        self.driver.execute_script("arguments[0].scrollIntoView();", submit_button)
+        time.sleep(2)
+        submit_button.click()
     
-    def testEditCategoryDish(self):
+    def testEditCategoryDish(self): 
         self.Login()
         self.driver.get('http://127.0.0.1:8000/menu-category/') 
         self.driver.find_element(By.CLASS_NAME, 'edit_Bebidas').click()
@@ -204,6 +208,16 @@ class TestHome(LiveServerTestCase):
         logout = self.driver.find_element(By.CLASS_NAME, 'logout')
         assert logout.get_attribute('href') == "http://127.0.0.1:8000/logout/"
         print(self.testLoginGerente())
+
+    def testViewFat(self):
+        self.Login()
+        self.driver.get('http://127.0.0.1:8000/home/')
+
+        submit_button = self.driver.find_element(By.CLASS_NAME, 'invoice_list')
+        self.driver.execute_script("arguments[0].scrollIntoView();", submit_button)
+        time.sleep(2)
+        submit_button.click()
+        
 
     def testSetGarcom(self):
         self.Login()
@@ -264,11 +278,6 @@ class TestHome(LiveServerTestCase):
         self.driver.find_element(By.NAME, 'Mesa 2').click()      
         self.driver.find_element(By.NAME, 'Fechar-conta').click()
         self.driver.find_element(By.CLASS_NAME, 'close-order').click()
-
-    def testViewFat(self):
-        self.Login()
-        self.driver.get('http://127.0.0.1:8000/home/')
-        self.driver.find_element(By.CLASS_NAME,'invoice').click()
 
 
 
