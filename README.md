@@ -101,9 +101,11 @@ Como fazer o logout:
 ## Relato sobre o uso de programação em pares
 
 12/06
+
 <a href="https://docs.google.com/document/d/105QWKvChwoKS81Jv5UkFe5LJIMIVt638z5g_l_EWwxg/edit?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/1481px-Google_Docs_logo_%282014-2020%29.svg.png" alt="Docs" style="width:43px;height:60px;"></a>
 
 17/04 e 15/05
+
 <a href="https://docs.google.com/document/d/1Rqi0MorEtPhKoJW9VL5VPWa65FVbXaZ-W1OhLCvOxoU/edit?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/1481px-Google_Docs_logo_%282014-2020%29.svg.png" alt="Docs" style="width:43px;height:60px;"></a>
 
 ## Missão
