@@ -22,6 +22,9 @@ Trata-se de um software de gerenciamento de bares e restaurantes baseado em pyth
   </a>
 </p> 
 
+## Instruções para configuração do ambiente e contribuição
+
+<a href="https://docs.google.com/document/d/1t84ajUrzzq7PwznsGUFIU5ifT6CxAnvPjJ2gUlR_5Ks/edit?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/1481px-Google_Docs_logo_%282014-2020%29.svg.png" alt="Docs" style="width:43px;height:60px;"></a>
 
 ## Ferramenta de organização de Sprint
 <a href="https://frssm.atlassian.net/jira/software/projects/MF21/boards/1"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original-wordmark.svg" alt="Jira" style="width:60px;height:60px;"></a>
@@ -119,10 +122,6 @@ João Henrique - jhml@cesar.school<br/>
 Pedro Leite - phmal@cesar.school<br/> 
 Rodrigo Dubeux - rdmo@cesar.school<br/>
 Victor Hora - vht@cesar.school
-
-## Instruções para configuração do ambiente e contribuição
-
-<a href="https://docs.google.com/document/d/1t84ajUrzzq7PwznsGUFIU5ifT6CxAnvPjJ2gUlR_5Ks/edit?usp=sharing"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Google_Docs_logo_%282014-2020%29.svg/1481px-Google_Docs_logo_%282014-2020%29.svg.png" alt="Docs" style="width:43px;height:60px;"></a>
 
 ## Licença
 Este projeto está licenciado sob a licença [MIT](https://github.com/flavio-muniz/MALO---fds-2023.1/blob/main/LICENSE).
