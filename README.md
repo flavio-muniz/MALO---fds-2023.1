@@ -121,7 +121,7 @@ Flávio Romero - frssm@cesar.school<br/>
 João Henrique - jhml@cesar.school<br/> 
 Pedro Leite - phmal@cesar.school<br/> 
 Rodrigo Dubeux - rdmo@cesar.school<br/>
-Victor Hora - vht@cesar.school<br/>
+Victor Hora - vht@cesar.school
 
 ## Licença
 Este projeto está licenciado sob a licença [MIT](https://github.com/flavio-muniz/MALO---fds-2023.1/blob/main/LICENSE).
