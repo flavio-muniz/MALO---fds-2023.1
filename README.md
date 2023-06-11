@@ -57,6 +57,10 @@ Protótipo em vídeo 2.0:
 
 <a href="https://www.youtube.com/watch?v=yYw_rK4zU0U"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
+Protótipo em vídeo 3.0:
+
+<a href="https://www.youtube.com/watch?v=NcZm-SCe4p0"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
+
 ## Site Navegável em vídeo:
 
 Versão 1.0:
@@ -70,6 +74,14 @@ Versão 2.0:
 ## Testes de Sistema (E2E) Automatizados em Selenium
 
 <a href="https://www.youtube.com/watch?v=IUuyq8_KMqo"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
+
+## Testes de Sistema (E2E) Automatizados em Selenium no Github Actions
+
+<a href="https://www.youtube.com/watch?v=ETDg3jblwKA"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
+
+## CI/CD com build e deployment automatizado
+
+<a href="https://www.youtube.com/watch?v=QVtvQhjAv1A"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
 ## Roteiro e instruções de acesso
 
