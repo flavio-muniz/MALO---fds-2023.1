@@ -57,6 +57,9 @@ Protótipo em vídeo 2.0:
 
 <a href="https://www.youtube.com/watch?v=yYw_rK4zU0U"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
+Protótipo em vídeo 2.0:
+
+<a href="https://www.youtube.com/watch?v=nmZnKkNNpRE"><img src="https://www.freepnglogos.com/uploads/youtube-vector-logo-png-9.png" alt="Youtube" style="width:60px;height:60px;"></a>
 
 
 ## Site Navegável em vídeo:
